@@ -76,7 +76,7 @@ namespace BlackJack2D
             int count = 1;
             foreach (var item in Deck.Deck)
             {
-                Console.WriteLine($"{count} Cards: {item.CardId}(id)       {item.CardName}(name)       {item.CardValue}(value)        {item.CardSymbol}(symbol)        {item.CardColor}(Color)");
+                Console.WriteLine($"{count} Cards: {item.CardId}(id)       {item.CardName}(name)       {item.CardValue}(value)        {item.CardSuit}(Suit)        {item.CardColor}(Color)");
                 count++;
             }
         }
