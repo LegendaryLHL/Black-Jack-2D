@@ -47,7 +47,6 @@ namespace BlackJack2D
         private static Random rng = new Random();
         public static PokerDeck ShuffleDeck(PokerDeck Deck)
         {
-            Console.Write("shuffled");
             for (int i = 1; i < 53; i++)
             {
                 int TempRandomNumber = rng.Next(0, 52);
