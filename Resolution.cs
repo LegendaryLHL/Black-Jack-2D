@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,115 +9,82 @@ namespace BlackJack2D
 {
     public class Resolution
     {
-        public static Vector2 ScreenResolution = new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
-        public static Vector2 ViewDeckCardsButtonLocation;
-        public static Vector2 ViewDeckCardsButtonScale;
-        public static Vector2 ShuffleDeckButtonLocation;
-        public static Vector2 ShuffleDeckButtonScale;
-        public static Vector2 BackButtonLocation;
-        public static Vector2 BackButtonScale;
-        public static Vector2 RearrangeButtonLocation;
-        public static Vector2 RearrangeButtonScale;
-        public static Vector2 DrawAllCardsLocation;
-        public static Vector2 DrawAllCardsScale;
-        public static Vector2 PlayButtonLocation;
-        public static Vector2 PlayButtonScale;
-        public static Vector2 QuitButtonLocation;
-        public static Vector2 QuitButtonScale;
-        public static Vector2 PlayBlackJackCardsScale;
-        public static Vector2 YourFirstCard;
-        public static Vector2 YourSecondCard;
-        public static Vector2 YourThirdCard;
-        public static Vector2 YourFourthCard;
-        public static Vector2 YourFifthCard;
-        public static Vector2 DealerFirstCard;
-        public static Vector2 DealerSecondCard;
-        public static Vector2 DealerThirdCard;
-        public static Vector2 DealerFourthCard;
-        public static Vector2 DealerFifthCard;
-        public static Vector2 HitButtonLocation;
-        public static Vector2 HitButtonScale;
-        public static Vector2 StayButtonLocation;
-        public static Vector2 StayButtonScale;
-        public static Vector2 PlaceBetLocation;
-        public static Vector2 YourMoneyLocation;
-        public static Vector2 AskForBetButtonsScale;
-        public static Vector2 _0Location;
-        public static Vector2 _50Location;
-        public static Vector2 _100Location;
-        public static Vector2 _200Location;
-        public static Vector2 _500Location;
-        public static Vector2 _1000Location;
-        public static Vector2 _5000Location;
-        public static Vector2 _10000Location;
-        public static Vector2 _100000Location;
-        public static Vector2 _1000000Location;
-        public static Vector2 ShopButtonLocation;
-        public static Vector2 ShopButtonScale;
-        public static Vector2 UpgradeButtonLocation;
-        public static Vector2 UpgradeButtonScale;
+        public string Id { get; set; }
+        public static List<Resolution> Resolutions { get; set; }
+        public Vector2 Vector { get; set; }
+
+        private static Vector2 ScreenResolution = new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
         //todo RearrangeButton, ShopButton, UpgradeButton 
+        private static Vector2 OriginalResolution = new Vector2(2048,1152);
+
+        public Resolution(Vector2 vector, string id)
+        {
+            Vector = vector;
+            Id = id;
+        }
+        private static void NewResolution(Vector2 vector, string id)
+        {
+            Resolutions.Add(new Resolution(vector, id));
+        }
         public static void MakeResolution()
         {
             //made for 2048, 1152
-            List<Vector2> locations = new List<Vector2>();
-            List<Vector2> scals = new List<Vector2>();
+            NewResolution(new Vector2(850, 520), "ViewDeckCardsButtonLocation");
+            NewResolution(new Vector2(350, 900), "ShuffleDeckButtonLocation");
+            NewResolution(new Vector2(1300, 900), "BackButtonLocation");
+            NewResolution(new Vector2(845, 900), "RearrangeButtonLocation");
+            NewResolution(new Vector2(140, 200), "DrawAllCardsLocation");
+            NewResolution(new Vector2(400, 520), "PlayButtonLocation");
+            NewResolution(new Vector2(1300, 520), "QuitButtonLocation");
+            NewResolution(new Vector2(200, 100), "DealerFirstCard");
+            NewResolution(new Vector2(500, 100), "DealerSecondCard");
+            NewResolution(new Vector2(800, 100), "DealerThirdCard");
+            NewResolution(new Vector2(1100, 100), "DealerFourthCard");
+            NewResolution(new Vector2(1400, 100), "DealerFifthCard");
+            NewResolution(new Vector2(200, 400), "YourFirstCard");
+            NewResolution(new Vector2(500, 400), "YourSecondCard");
+            NewResolution(new Vector2(800, 400), "YourThirdCard");
+            NewResolution(new Vector2(1100, 400), "YourFourthCard");
+            NewResolution(new Vector2(1400, 400), "YourFifthCard");
+            NewResolution(new Vector2(350, 900), "HitButtonLocation");
+            NewResolution(new Vector2(1250, 900), "StayButtonLocation");
+            NewResolution(new Vector2(200, 100), "PlaceBetLocation");
+            NewResolution(new Vector2(100, 1000), "YourMoneyLocation");
+            NewResolution(new Vector2(100, 520), "_0Location");
+            NewResolution(new Vector2(400, 520), "_50Location");
+            NewResolution(new Vector2(700, 520), "_100Location");
+            NewResolution(new Vector2(1000, 520), "_200Location");
+            NewResolution(new Vector2(1300, 520), "_500Location");
+            NewResolution(new Vector2(1600, 520), "_1000Location");
+            NewResolution(new Vector2(100, 700), "_5000Location");
+            NewResolution(new Vector2(400, 700), "_10000Location");
+            NewResolution(new Vector2(700, 700), "_100000Location");
+            NewResolution(new Vector2(1000, 700), "_1000000Location");
+            NewResolution(new Vector2(630, 750), "ShopButtonLocation");
+            NewResolution(new Vector2(400, 520), "UpgradeButtonLocation");
+            NewResolution(new Vector2(200, 100), "ViewDeckCardsButtonScale");
+            NewResolution(new Vector2(200, 100), "ShuffleDeckButtonScale");
+            NewResolution(new Vector2(200, 100), "BackButtonScale");
+            NewResolution(new Vector2(200, 100), "RearrangeButtonScale");
+            NewResolution(new Vector2(88, 124), "DrawAllCardsScale");
+            NewResolution(new Vector2(200, 100), "PlayButtonScale");
+            NewResolution(new Vector2(200, 100), "QuitButtonScale");
+            NewResolution(new Vector2(176, 248), "PlayBlackJackCardsScale");
+            NewResolution(new Vector2(200, 100), "HitButtonScale");
+            NewResolution(new Vector2(200, 100), "StayButtonScale");
+            NewResolution(new Vector2(200, 100), "AskForBetButtonsScale");
+            NewResolution(new Vector2(200, 100), "ShopButtonScale");
+            NewResolution(new Vector2(200, 100), "UpgradeButtonScale");
 
-            locations.Add(new Vector2(850, 520));
-            locations.Add(new Vector2(350, 900));
-            locations.Add(new Vector2(1300, 900));
-            locations.Add(new Vector2(845, 900));
-            locations.Add(new Vector2(140, 200));
-            locations.Add(new Vector2(400, 520));
-            locations.Add(new Vector2(1300, 520));
-            ViewDeckCardsButtonLocation = new Vector2(850, 520);
-            ViewDeckCardsButtonScale = new Vector2(200, 100);
-            ShuffleDeckButtonLocation = new Vector2(350, 900);
-            ShuffleDeckButtonScale = new Vector2(200, 100);
-            BackButtonLocation = new Vector2(1300, 900);
-            BackButtonScale = new Vector2(200, 100);
-            RearrangeButtonLocation = new Vector2(845, 900);
-            RearrangeButtonScale = new Vector2(200, 100);
-            DrawAllCardsLocation = new Vector2(140, 200);
-            DrawAllCardsScale = new Vector2(88, 124);
-            PlayButtonLocation = new Vector2(400, 520);
-            PlayButtonScale = new Vector2(200, 100);
-            QuitButtonLocation = new Vector2(1300, 520);
-            QuitButtonScale = new Vector2(200, 100);
-            PlayBlackJackCardsScale = new Vector2(176, 248);
-            DealerFirstCard = new Vector2(200, 100);
-            DealerSecondCard = new Vector2(500, 100);
-            DealerThirdCard = new Vector2(800, 100);
-            DealerFourthCard = new Vector2(1100, 100);
-            DealerFifthCard = new Vector2(1400, 100);
-            YourFirstCard = new Vector2(200, 400);
-            YourSecondCard = new Vector2(500, 400);
-            YourThirdCard = new Vector2(800, 400);
-            YourFourthCard = new Vector2(1100, 400);
-            YourFifthCard = new Vector2(1400, 400);
-            HitButtonLocation = new Vector2(350, 900);
-            HitButtonScale = new Vector2(200, 100);
-            StayButtonLocation = new Vector2(1250, 900);
-            StayButtonScale = new Vector2(200, 100);
-            PlaceBetLocation = new Vector2(200, 100);
-            YourMoneyLocation = new Vector2(100, 1000);
-            AskForBetButtonsScale = new Vector2(200, 100);
-            _0Location = new Vector2(100, 520);
-            _50Location = new Vector2(400, 520);
-            _100Location = new Vector2(700, 520);
-            _200Location = new Vector2(1000, 520);
-            _500Location = new Vector2(1300, 520);
-            _1000Location = new Vector2(1600, 520);
-            _5000Location = new Vector2(100, 700);
-            _10000Location = new Vector2(400, 700);
-            _100000Location = new Vector2(700, 700);
-            _1000000Location = new Vector2(1000, 700);
-            ShopButtonLocation = new Vector2(630, 750);
-            ShopButtonScale = new Vector2(200, 100);
-            UpgradeButtonLocation = new Vector2(400, 520);
-            UpgradeButtonScale = new Vector2(200, 100);
+            foreach (Resolution resolution in Resolutions)
+            {
+                if (resolution.Id.Contains("Scale"))
+                {
+                    resolution.Vector = new Vector2(resolution.Vector.x* ScreenResolution.x / OriginalResolution.x, resolution.Vector.y * ScreenResolution.y / OriginalResolution.y);
+                }
+            }
         }
-        public static void ViewResolutionSimulation(int x, int y)
+        private protected static void ViewResolutionSimulation(int x, int y)
         {
             new Sprite2D(new Vector2(x, 1), new Vector2(1, 2000), "ViewDeckCardsButton", "ViewDeckCardsButton");
             new Sprite2D(new Vector2(1, y), new Vector2(2000, 1), "ViewDeckCardsButton", "ViewDeckCardsButton");
