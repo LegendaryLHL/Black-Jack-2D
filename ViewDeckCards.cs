@@ -18,9 +18,9 @@ namespace BlackJack2D
         {
             Sprite2D.ClearSprites();
             DrawAllCards();
-            ShuffleDeckButton = new Sprite2D(Resolution.ShuffleDeckButtonLocation, Resolution.ShuffleDeckButtonScale, "ShuffleDeckButton", "ShuffleDeckButton");
-            BackButton = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButton", "BackButton");
-            RearrangeButton = new Sprite2D(Resolution.RearrangeButtonLocation, Resolution.RearrangeButtonScale, "RearrangeButton", "RearrangeButton");
+            ShuffleDeckButton = new Sprite2D("ShuffleDeckButton");
+            BackButton = new Sprite2D("BackButton");
+            RearrangeButton = new Sprite2D("RearrangeButton");
         }
         public static void DrawAllCards()
         {
@@ -29,7 +29,7 @@ namespace BlackJack2D
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    BlackJack2DCode.NewPokerDeck.Deck[count].DrawCard(new Vector2(j * Resolution.DrawAllCardsLocation.x + 50, i * Resolution.DrawAllCardsLocation.y + 50), Resolution.DrawAllCardsScale);
+                    BlackJack2DCode.NewPokerDeck.Deck[count].DrawCard(new Resolution(Resolution.GetResolution("DrawAllCards").Scale, new Vector2(j * Resolution.GetResolution("DrawAllCards").Position.x + 50, i * Resolution.GetResolution("DrawAllCards").Position.y + 50)));
                     count++;
                 }
             }

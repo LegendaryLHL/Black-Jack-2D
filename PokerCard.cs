@@ -62,9 +62,19 @@ namespace BlackJack2D
             CardNameId = CardName + "Of" + CardSuit;
         }
 
-        public void DrawCard(Vector2 a, Vector2 b)
+        public void DrawCard()
         {
-            new Sprite2D(a, b, CardNameId, CardNameId);
+            new Sprite2D(CardNameId);
+        }
+        public void DrawCard(Resolution resolution)
+        {
+            new Sprite2D(resolution, CardNameId, CardNameId);
+        }
+
+        //bad
+        public void DrawCard(string resolutionName)
+        {
+            new Sprite2D(Resolution.GetResolution(resolutionName), CardNameId, CardNameId);
         }
     }
 }

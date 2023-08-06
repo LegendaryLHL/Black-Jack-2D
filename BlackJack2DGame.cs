@@ -219,10 +219,10 @@ namespace BlackJack2D
         public static void Menu()
         {
             Sprite2D.ClearSprites();
-            ViewDeckCardsButton = new Sprite2D(Resolution.ViewDeckCardsButtonLocation, Resolution.ViewDeckCardsButtonScale, "ViewDeckCardsButton", "ViewDeckCardsButton");
-            PlayButton = new Sprite2D(Resolution.PlayButtonLocation, Resolution.PlayButtonScale, "PlayButton", "PlayButton");
-            QuitButton = new Sprite2D(Resolution.QuitButtonLocation, Resolution.QuitButtonScale, "QuitButton", "QuitButton");
-            ShopButton = new Sprite2D(Resolution.ShopButtonLocation, Resolution.ShopButtonScale, "ShopButton", "ShopButton");
+            ViewDeckCardsButton = new Sprite2D("ViewDeckCardsButton");
+            PlayButton = new Sprite2D("PlayButton");
+            QuitButton = new Sprite2D("QuitButton");
+            ShopButton = new Sprite2D("ShopButton");
         }
 
         public void CheakHover()
@@ -232,260 +232,260 @@ namespace BlackJack2D
             {
                 ButtonHover = "ViewDeckCardsButton";
                 ViewDeckCardsButton.DestroySelf();
-                ViewDeckCardsButtonHover = new Sprite2D(Resolution.ViewDeckCardsButtonLocation, Resolution.ViewDeckCardsButtonScale, "ViewDeckCardsButtonHover", "ViewDeckCardsButtonHover");
+                ViewDeckCardsButtonHover = new Sprite2D("ViewDeckCardsButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ViewDeckCardsButtonHover") && ButtonHover == "ViewDeckCardsButton")
             {
                 ButtonHover = "";
                 ViewDeckCardsButtonHover.DestroySelf();
-                ViewDeckCardsButton = new Sprite2D(Resolution.ViewDeckCardsButtonLocation, Resolution.ViewDeckCardsButtonScale, "ViewDeckCardsButton", "ViewDeckCardsButton");
+                ViewDeckCardsButton = new Sprite2D("ViewDeckCardsButton");
             }
             //Shuffle Deck Button Hover
             if (Sprite2D.CursorIsOnStripe("ShuffleDeckButton") && ButtonHover == "")
             {
                 ButtonHover = ButtonHover = "ShuffleDeckButton";
                 ViewDeckCards.ShuffleDeckButton.DestroySelf();
-                ViewDeckCards.ShuffleDeckButtonHover = new Sprite2D(Resolution.ShuffleDeckButtonLocation, Resolution.ShuffleDeckButtonScale, "ShuffleDeckButtonHover", "ShuffleDeckButtonHover");
+                ViewDeckCards.ShuffleDeckButtonHover = new Sprite2D("ShuffleDeckButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ShuffleDeckButtonHover") && ButtonHover == "ShuffleDeckButton")
             {
                 ButtonHover = "";
                 ViewDeckCards.ShuffleDeckButtonHover.DestroySelf();
-                ViewDeckCards.ShuffleDeckButton = new Sprite2D(Resolution.ShuffleDeckButtonLocation, Resolution.ShuffleDeckButtonScale, "ShuffleDeckButton", "ShuffleDeckButton");
+                ViewDeckCards.ShuffleDeckButton = new Sprite2D("ShuffleDeckButton");
             }
             //Back Button Hover
             if (Sprite2D.CursorIsOnStripe("BackButton") && ButtonHover == "")
             {
                 ButtonHover = "BackButton";
                 ViewDeckCards.BackButton.DestroySelf();
-                ViewDeckCards.BackButtonHover = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButtonHover", "BackButtonHover");
+                ViewDeckCards.BackButtonHover = new Sprite2D("BackButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("BackButtonHover") && ButtonHover == "BackButton")
             {
                 ButtonHover = "";
                 ViewDeckCards.BackButtonHover.DestroySelf();
-                ViewDeckCards.BackButton = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButton", "BackButton");
+                ViewDeckCards.BackButton = new Sprite2D("BackButton");
             }
             //Rearrange Button Hover
             if (Sprite2D.CursorIsOnStripe("RearrangeButton") && ButtonHover == "")
             {
                 ButtonHover = "RearrangeButton";
                 ViewDeckCards.RearrangeButton.DestroySelf();
-                ViewDeckCards.RearrangeButtonHover = new Sprite2D(Resolution.RearrangeButtonLocation, Resolution.RearrangeButtonScale, "RearrangeButtonHover", "RearrangeButtonHover");
+                ViewDeckCards.RearrangeButtonHover = new Sprite2D("RearrangeButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("RearrangeButtonHover") && ButtonHover == "RearrangeButton")
             {
                 ButtonHover = "";
                 ViewDeckCards.RearrangeButtonHover.DestroySelf();
-                ViewDeckCards.RearrangeButton = new Sprite2D(Resolution.RearrangeButtonLocation, Resolution.RearrangeButtonScale, "RearrangeButton", "RearrangeButton");
+                ViewDeckCards.RearrangeButton = new Sprite2D("RearrangeButton");
             }
             //Play Button Hover
             if (Sprite2D.CursorIsOnStripe("PlayButton") && ButtonHover == "")
             {
                 ButtonHover = "PlayButton";
                 PlayButton.DestroySelf();
-                PlayButtonHover = new Sprite2D(Resolution.PlayButtonLocation, Resolution.PlayButtonScale, "PlayButtonHover", "PlayButtonHover");
+                PlayButtonHover = new Sprite2D("PlayButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("PlayButtonHover") && ButtonHover == "PlayButton")
             {
                 ButtonHover = "";
                 PlayButtonHover.DestroySelf();
-                PlayButton = new Sprite2D(Resolution.PlayButtonLocation, Resolution.PlayButtonScale, "PlayButton", "PlayButton");
+                PlayButton = new Sprite2D("PlayButton");
             }
             //Quit Button Hover
             if (Sprite2D.CursorIsOnStripe("QuitButton") && ButtonHover == "")
             {
                 ButtonHover = "QuitButton";
                 QuitButton.DestroySelf();
-                QuitButtonHover = new Sprite2D(Resolution.QuitButtonLocation, Resolution.QuitButtonScale, "QuitButtonHover", "QuitButtonHover");
+                QuitButtonHover = new Sprite2D("QuitButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("QuitButtonHover") && ButtonHover == "QuitButton")
             {
                 ButtonHover = "";
                 QuitButtonHover.DestroySelf();
-                QuitButton = new Sprite2D(Resolution.QuitButtonLocation, Resolution.QuitButtonScale, "QuitButton", "QuitButton");
+                QuitButton = new Sprite2D("QuitButton");
             }
             //Shop Button Hover
             if (Sprite2D.CursorIsOnStripe("ShopButton") && ButtonHover == "")
             {
                 ButtonHover = "ShopButton";
                 ShopButton.DestroySelf();
-                ShopButtonHover = new Sprite2D(Resolution.ShopButtonLocation, Resolution.ShopButtonScale, "ShopButtonHover", "ShopButtonHover");
+                ShopButtonHover = new Sprite2D("ShopButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ShopButtonHover") && ButtonHover == "ShopButton")
             {
                 ButtonHover = "";
                 ShopButtonHover.DestroySelf();
-                ShopButton = new Sprite2D(Resolution.ShopButtonLocation, Resolution.ShopButtonScale, "ShopButton", "ShopButton");
+                ShopButton = new Sprite2D("ShopButton");
             }
             //Upgrade Button Hover
             if (Sprite2D.CursorIsOnStripe("UpgradeButton") && ButtonHover == "")
             {
                     ButtonHover = "UpgradeButton";
                     Shop.UpgradeButton.DestroySelf();
-                    Shop.UpgradeButtonHover = new Sprite2D(Resolution.UpgradeButtonLocation, Resolution.UpgradeButtonScale, "UpgradeButtonHover", "UpgradeButtonHover");
+                    Shop.UpgradeButtonHover = new Sprite2D("UpgradeButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("UpgradeButtonHover") && ButtonHover == "UpgradeButton")
             {
                 ButtonHover = "";
                 Shop.UpgradeButtonHover.DestroySelf();
-                Shop.UpgradeButton = new Sprite2D(Resolution.UpgradeButtonLocation, Resolution.UpgradeButtonScale, "UpgradeButton", "UpgradeButton");
+                Shop.UpgradeButton = new Sprite2D("UpgradeButton");
             }
             //Hit Button Hover
             if (Sprite2D.CursorIsOnStripe("HitButton") && ButtonHover == "")
             {
                 ButtonHover = "HitButton";
                 BlackJack2DCode.HitButton.DestroySelf();
-                BlackJack2DCode.HitButtonHover = new Sprite2D(Resolution.HitButtonLocation, Resolution.HitButtonScale, "HitButtonHover", "HitButtonHover");
+                BlackJack2DCode.HitButtonHover = new Sprite2D("HitButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("HitButtonHover") && ButtonHover == "HitButton")
             {
                 ButtonHover = "";
                 BlackJack2DCode.HitButtonHover.DestroySelf();
-                BlackJack2DCode.HitButton = new Sprite2D(Resolution.HitButtonLocation, Resolution.HitButtonScale, "HitButton", "HitButton");
+                BlackJack2DCode.HitButton = new Sprite2D("HitButton");
             }
             //Stay Button Hover
             if (Sprite2D.CursorIsOnStripe("StayButton") && ButtonHover == "")
             {
                 ButtonHover = "StayButton";
                 BlackJack2DCode.StayButton.DestroySelf();
-                BlackJack2DCode.StayButtonHover = new Sprite2D(Resolution.StayButtonLocation, Resolution.StayButtonScale, "StayButtonHover", "StayButtonHover");
+                BlackJack2DCode.StayButtonHover = new Sprite2D("StayButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("StayButtonHover") && ButtonHover == "StayButton")
             {
                 ButtonHover = "";
                 BlackJack2DCode.StayButtonHover.DestroySelf();
-                BlackJack2DCode.StayButton = new Sprite2D(Resolution.StayButtonLocation, Resolution.StayButtonScale, "StayButton", "StayButton");
+                BlackJack2DCode.StayButton = new Sprite2D("StayButton");
             }
             //_0 Hover
             if (Sprite2D.CursorIsOnStripe("_0") && ButtonHover == "")
             {
                 ButtonHover = "_0";
                 BlackJack2DCode._0.DestroySelf();
-                BlackJack2DCode._0Hover = new Sprite2D(Resolution._0Location, Resolution.AskForBetButtonsScale, "_0Hover", "_0Hover");
+                BlackJack2DCode._0Hover = new Sprite2D("_0Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_0Hover") && ButtonHover == "_0")
             {
                 ButtonHover = "";
                 BlackJack2DCode._0Hover.DestroySelf();
-                 BlackJack2DCode._0 = new Sprite2D(Resolution._0Location, Resolution.AskForBetButtonsScale, "_0", "_0");
+                 BlackJack2DCode._0 = new Sprite2D("_0");
             }
             //_50 Hover
             if (Sprite2D.CursorIsOnStripe("_50") && ButtonHover == "")
             {
                 ButtonHover = "_50";
                 BlackJack2DCode._50.DestroySelf();
-                BlackJack2DCode._50Hover = new Sprite2D(Resolution._50Location, Resolution.AskForBetButtonsScale, "_50Hover", "_50Hover");
+                BlackJack2DCode._50Hover = new Sprite2D("_50Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_50Hover") && ButtonHover == "_50")
             {
                 ButtonHover = "";
                 BlackJack2DCode._50Hover.DestroySelf();
-                BlackJack2DCode._50 = new Sprite2D(Resolution._50Location, Resolution.AskForBetButtonsScale, "_50", "_50");
+                BlackJack2DCode._50 = new Sprite2D("_50");
             }
             //_100 Hover
             if (Sprite2D.CursorIsOnStripe("_100") && ButtonHover == "")
             {
                 ButtonHover = "_100";
                 BlackJack2DCode._100.DestroySelf();
-                BlackJack2DCode._100Hover = new Sprite2D(Resolution._100Location, Resolution.AskForBetButtonsScale, "_100Hover", "_100Hover");
+                BlackJack2DCode._100Hover = new Sprite2D("_100Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_100Hover") && ButtonHover == "_100")
             {
                 ButtonHover = "";
                 BlackJack2DCode._100Hover.DestroySelf();
-                BlackJack2DCode._100 = new Sprite2D(Resolution._100Location, Resolution.AskForBetButtonsScale, "_100", "_100");
+                BlackJack2DCode._100 = new Sprite2D("_100");
             }
             //_200 Hover
             if (Sprite2D.CursorIsOnStripe("_200") && ButtonHover == "")
             {
                 ButtonHover = "_200";
                 BlackJack2DCode._200.DestroySelf();
-                BlackJack2DCode._200Hover = new Sprite2D(Resolution._200Location, Resolution.AskForBetButtonsScale, "_200Hover", "_200Hover");
+                BlackJack2DCode._200Hover = new Sprite2D("_200Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_200Hover") && ButtonHover == "_200")
             {
                 ButtonHover = "";
                 BlackJack2DCode._200Hover.DestroySelf();
-                BlackJack2DCode._200 = new Sprite2D(Resolution._200Location, Resolution.AskForBetButtonsScale, "_200", "_200");
+                BlackJack2DCode._200 = new Sprite2D("_200");
             }
             //_500 Hover
             if (Sprite2D.CursorIsOnStripe("_500") && ButtonHover == "")
             {
                 ButtonHover = "_500";
                 BlackJack2DCode._500.DestroySelf();
-                BlackJack2DCode._500Hover = new Sprite2D(Resolution._500Location, Resolution.AskForBetButtonsScale, "_500Hover", "_500Hover");
+                BlackJack2DCode._500Hover = new Sprite2D("_500Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_500Hover") && ButtonHover == "_500")
             {
                 ButtonHover = "";
                 BlackJack2DCode._500Hover.DestroySelf();
-                BlackJack2DCode._500 = new Sprite2D(Resolution._500Location, Resolution.AskForBetButtonsScale, "_500", "_500");
+                BlackJack2DCode._500 = new Sprite2D("_500");
             }
             //_1000 Hover
             if (Sprite2D.CursorIsOnStripe("_1000") && ButtonHover == "")
             {
                ButtonHover = "_1000";
                BlackJack2DCode._1000.DestroySelf();
-               BlackJack2DCode._1000Hover = new Sprite2D(Resolution._1000Location, Resolution.AskForBetButtonsScale, "_1000Hover", "_1000Hover");
+               BlackJack2DCode._1000Hover = new Sprite2D("_1000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_1000Hover") && ButtonHover == "_1000")
             {
                 ButtonHover = "";
                 BlackJack2DCode._1000Hover.DestroySelf();
-                BlackJack2DCode._1000 = new Sprite2D(Resolution._1000Location, Resolution.AskForBetButtonsScale, "_1000", "_1000");
+                BlackJack2DCode._1000 = new Sprite2D("_1000");
             }
             //_5000 Hover
             if (Sprite2D.CursorIsOnStripe("_5000") && ButtonHover == "")
             {
                 ButtonHover = "_5000";
                 BlackJack2DCode._5000.DestroySelf();
-                BlackJack2DCode._5000Hover = new Sprite2D(Resolution._5000Location, Resolution.AskForBetButtonsScale, "_5000Hover", "_5000Hover");
+                BlackJack2DCode._5000Hover = new Sprite2D("_5000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_5000Hover") && ButtonHover == "_5000")
             {
                 ButtonHover = "";
                 BlackJack2DCode._5000Hover.DestroySelf();
-                BlackJack2DCode._5000 = new Sprite2D(Resolution._5000Location, Resolution.AskForBetButtonsScale, "_5000", "_5000");
+                BlackJack2DCode._5000 = new Sprite2D("_5000");
             }
             //_10000 hover
             if (Sprite2D.CursorIsOnStripe("_10000") && ButtonHover == "")
             {
                 ButtonHover = "_10000";
                 BlackJack2DCode._10000.DestroySelf();
-                BlackJack2DCode._10000Hover = new Sprite2D(Resolution._10000Location, Resolution.AskForBetButtonsScale, "_10000Hover", "_10000Hover");
+                BlackJack2DCode._10000Hover = new Sprite2D("_10000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_10000Hover") && ButtonHover == "_10000")
             {
                 ButtonHover = "";
                 BlackJack2DCode._10000Hover.DestroySelf();
-                BlackJack2DCode._10000 = new Sprite2D(Resolution._10000Location, Resolution.AskForBetButtonsScale, "_10000", "_10000");
+                BlackJack2DCode._10000 = new Sprite2D("_10000");
             }
             //_100000
             if (Sprite2D.CursorIsOnStripe("_100000") && ButtonHover == "")
             {
                 ButtonHover = "_100000";
                 BlackJack2DCode._100000.DestroySelf();
-                BlackJack2DCode._100000Hover = new Sprite2D(Resolution._100000Location, Resolution.AskForBetButtonsScale, "_100000Hover", "_100000Hover");
+                BlackJack2DCode._100000Hover = new Sprite2D("_100000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_100000Hover") && ButtonHover == "_100000")
             {
                 ButtonHover = "";
                 BlackJack2DCode._100000Hover.DestroySelf();
-                BlackJack2DCode._100000 = new Sprite2D(Resolution._100000Location, Resolution.AskForBetButtonsScale, "_100000", "_100000");
+                BlackJack2DCode._100000 = new Sprite2D("_100000");
             }
             //_1000000 Hover
             if (Sprite2D.CursorIsOnStripe("_1000000") && ButtonHover == "")
             {
                 ButtonHover = "_1000000";
                 BlackJack2DCode._1000000.DestroySelf();
-                BlackJack2DCode._1000000Hover = new Sprite2D(Resolution._1000000Location, Resolution.AskForBetButtonsScale, "_1000000Hover", "_1000000Hover");
+                BlackJack2DCode._1000000Hover = new Sprite2D("_1000000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_1000000Hover") && ButtonHover == "_1000000")
             {
                 ButtonHover = "";
                 BlackJack2DCode._1000000Hover.DestroySelf();
-                BlackJack2DCode._1000000 = new Sprite2D(Resolution._1000000Location, Resolution.AskForBetButtonsScale, "_1000000", "_1000000");
+                BlackJack2DCode._1000000 = new Sprite2D("_1000000");
             }
             
         }

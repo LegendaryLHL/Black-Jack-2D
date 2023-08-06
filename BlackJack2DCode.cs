@@ -55,19 +55,19 @@ namespace BlackJack2D
             }
             //put bet
             Sprite2D.ClearSprites();
-            new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.PlaceBetLocation);
-            new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.YourMoneyLocation);
-            _0 = new Sprite2D(Resolution._0Location, Resolution.AskForBetButtonsScale, "_0", "_0");
-            _50 = new Sprite2D(Resolution._50Location, Resolution.AskForBetButtonsScale, "_50", "_50");
-            _100 = new Sprite2D(Resolution._100Location, Resolution.AskForBetButtonsScale, "_100", "_100");
-            _200 = new Sprite2D(Resolution._200Location, Resolution.AskForBetButtonsScale, "_200", "_200");
-            _500 = new Sprite2D(Resolution._500Location, Resolution.AskForBetButtonsScale, "_500", "_500");
-            _1000 = new Sprite2D(Resolution._1000Location, Resolution.AskForBetButtonsScale, "_1000", "_1000");
-            _5000 = new Sprite2D(Resolution._5000Location, Resolution.AskForBetButtonsScale, "_5000", "_5000");
-            _10000 = new Sprite2D(Resolution._10000Location, Resolution.AskForBetButtonsScale, "_10000", "_10000");
-            _100000 = new Sprite2D(Resolution._100000Location, Resolution.AskForBetButtonsScale, "_100000", "_100000");
-            _1000000 = new Sprite2D(Resolution._1000000Location, Resolution.AskForBetButtonsScale, "_1000000", "_1000000");
-            ViewDeckCards.BackButton = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButton", "BackButton");
+            new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
+            new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
+            _0 = new Sprite2D("_0");
+            _50 = new Sprite2D("_50");
+            _100 = new Sprite2D("_100");
+            _200 = new Sprite2D("_200");
+            _500 = new Sprite2D("_500");
+            _1000 = new Sprite2D("_1000");
+            _5000 = new Sprite2D("_5000");
+            _10000 = new Sprite2D("_10000");
+            _100000 = new Sprite2D("_100000");
+            _1000000 = new Sprite2D("_1000000");
+            ViewDeckCards.BackButton = new Sprite2D("BackButton");
         }
         public static void BlackJack()
         {
@@ -85,50 +85,50 @@ namespace BlackJack2D
                 NewPokerDeck.Deck.Add(Temp);
             }
 
-            HitButton = new Sprite2D(Resolution.HitButtonLocation, Resolution.HitButtonScale, "HitButton", "HitButton");
-            StayButton = new Sprite2D(Resolution.StayButtonLocation, Resolution.StayButtonScale, "StayButton", "StayButton");
+            HitButton = new Sprite2D("HitButton");
+            StayButton = new Sprite2D("StayButton");
 
-            NewPokerDeck.Deck[0].DrawCard(Resolution.DealerFirstCard, Resolution.PlayBlackJackCardsScale);
-            BackCard = new Sprite2D(Resolution.DealerSecondCard, Resolution.PlayBlackJackCardsScale, "PokerCardBack", "PokerCardBack");
+            NewPokerDeck.Deck[0].DrawCard("DealerFirstCard");
+            BackCard = new Sprite2D(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
 
-            NewPokerDeck.Deck[5].DrawCard(Resolution.YourFirstCard, Resolution.PlayBlackJackCardsScale);
-            NewPokerDeck.Deck[6].DrawCard(Resolution.YourSecondCard, Resolution.PlayBlackJackCardsScale);
+            NewPokerDeck.Deck[5].DrawCard("YourFirstCard");
+            NewPokerDeck.Deck[6].DrawCard("YourSecondCard");
         }
 
         public static void State1Function()
         {
-            NewPokerDeck.Deck[7].DrawCard(Resolution.YourThirdCard, Resolution.PlayBlackJackCardsScale);
+            NewPokerDeck.Deck[7].DrawCard("YourThirdCard");
         }
         public static void State2Function()
         {
-            NewPokerDeck.Deck[8].DrawCard(Resolution.YourFourthCard, Resolution.PlayBlackJackCardsScale);
+            NewPokerDeck.Deck[8].DrawCard("YourFourthCard");
         }
         public static void State3Function()
         {
-            NewPokerDeck.Deck[9].DrawCard(Resolution.YourFifthCard, Resolution.PlayBlackJackCardsScale);
+            NewPokerDeck.Deck[9].DrawCard("YourFifthCard");
         }
 
         public static void StayFunction()
         {
             BackCard.DestroySelf();
-            NewPokerDeck.Deck[1].DrawCard(Resolution.DealerSecondCard, Resolution.PlayBlackJackCardsScale);
+            NewPokerDeck.Deck[1].DrawCard("DealerSecondCard");
             DealerTotal = NewPokerDeck.Deck[0].CardValue + NewPokerDeck.Deck[1].CardValue;
             DealerState = 1;
             if (DealerTotal < 17)
             {
-                NewPokerDeck.Deck[2].DrawCard(Resolution.DealerThirdCard, Resolution.PlayBlackJackCardsScale);
+                NewPokerDeck.Deck[2].DrawCard("DealerThirdCard");
                 DealerTotal += NewPokerDeck.Deck[2].CardValue;
                 DealerState = 2;
             }
             if (DealerTotal < 17)
             {
-                NewPokerDeck.Deck[3].DrawCard(Resolution.DealerFourthCard, Resolution.PlayBlackJackCardsScale);
+                NewPokerDeck.Deck[3].DrawCard("DealerFourthCard");
                 DealerTotal += NewPokerDeck.Deck[3].CardValue;
                 DealerState = 3;
             }
             if (DealerTotal < 17)
             {
-                NewPokerDeck.Deck[4].DrawCard(Resolution.DealerFifthCard, Resolution.PlayBlackJackCardsScale);
+                NewPokerDeck.Deck[4].DrawCard("DealerFifthCard");
                 DealerTotal += NewPokerDeck.Deck[4].CardValue;
                 DealerState = 4;
             }
@@ -199,28 +199,28 @@ namespace BlackJack2D
 
             HitButton.DestroySelf();
             StayButtonHover.DestroySelf();
-            ViewDeckCards.BackButton = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButton", "BackButton");
+            ViewDeckCards.BackButton = new Sprite2D("BackButton");
             if (YourTotal > DealerTotal && YourTotal <= 21)
             {
                 //win
-                new Text("You Won!!!!", new Font("Arial", Resolution.HitButtonScale.y, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.HitButtonLocation);
+                new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
             else if (YourTotal <= 21 && DealerTotal > 21)
             {
                 //win
-                new Text("You Won!!!!", new Font("Arial", Resolution.HitButtonScale.y, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.HitButtonLocation);
+                new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
             else if (YourTotal <= 21 && YourTotal == DealerTotal)
             {
                 //tie
-                new Text("Tie", new Font("Arial", Resolution.HitButtonScale.y, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.HitButtonLocation);
+                new Text("Tie", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
             }
             else
             {
                 //lose
-                new Text("You Lost :(", new Font("Arial", Resolution.HitButtonScale.y, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.HitButtonLocation);
+                new Text("You Lost :(", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
                 Money -= BetAmount;
             }
             WriteMoney();

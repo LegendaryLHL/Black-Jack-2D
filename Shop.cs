@@ -13,8 +13,8 @@ namespace BlackJack2D
         public static void ShopFunction()
         {
             Sprite2D.ClearSprites();
-            UpgradeButton = new Sprite2D(Resolution.UpgradeButtonLocation, Resolution.UpgradeButtonScale, "UpgradeButton", "UpgradeButton");
-            ViewDeckCards.BackButton = new Sprite2D(Resolution.BackButtonLocation, Resolution.BackButtonScale, "BackButton", "BackButton");
+            UpgradeButton = new Sprite2D("UpgradeButton");
+            ViewDeckCards.BackButton = new Sprite2D("BackButton");
         }
     }
 }

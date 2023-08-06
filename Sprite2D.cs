@@ -17,10 +17,10 @@ namespace BlackJack2D
         public Bitmap Sprite = null;
         public bool IsRefrence = false;
 
-        public Sprite2D(Vector2 Position, Vector2 Scale, string Directory, string Tag)
+        public Sprite2D(Resolution resolution, string Directory, string Tag)
         {
-            this.Position = Position;
-            this.Scale = Scale;
+            this.Position = resolution.Position;
+            this.Scale = resolution.Scale;
             this.Directory = Directory;
             this.Tag = Tag;
 
@@ -30,9 +30,22 @@ namespace BlackJack2D
 
             GameEngine.RegisterSprite(this);
         }
-        public Sprite2D(string Directory)
+        public Sprite2D(Resolution resolution, string Tag)
         {
-            this.IsRefrence = true;
+            this.Position = resolution.Position;
+            this.Scale = resolution.Scale;
+            this.Directory = Tag;
+            this.Tag = Tag;
+
+            Image temp = Image.FromFile($"Assets/{Directory}.png");
+            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+            Sprite = sprite;
+
+            GameEngine.RegisterSprite(this);
+        }
+        public Sprite2D(string Directory, bool IsRefrence)
+        {
+            this.IsRefrence = IsRefrence;
             this.Directory = Directory;
 
             Image temp = Image.FromFile($"Assets/{Directory}.png");
@@ -41,17 +54,30 @@ namespace BlackJack2D
 
             GameEngine.RegisterSprite(this);
         }
-        public Sprite2D(Vector2 Position, Vector2 Scale, Bitmap Refrence, string Tag)
+        public Sprite2D(Resolution resolution, Bitmap Refrence, string Tag)
         {
-            this.Position = Position;
-            this.Scale = Scale;
+            this.Position = resolution.Position;
+            this.Scale = resolution.Scale;
             this.Tag = Tag;
 
             Sprite = Refrence;
 
             GameEngine.RegisterSprite(this);
         }
-        
+        public Sprite2D(string Tag)
+        {
+            Resolution resolutionInstance = Resolution.GetResolution(Tag);
+            this.Position = resolutionInstance.Position;
+            this.Scale = resolutionInstance.Scale;
+            this.Directory = Tag;
+            this.Tag = Tag;
+
+            Image temp = Image.FromFile($"Assets/{Directory}.png");
+            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+            Sprite = sprite;
+
+            GameEngine.RegisterSprite(this);
+        }
         public bool IsColiding(string tag)
         {
             foreach (Sprite2D b in GameEngine.AllSprite)
