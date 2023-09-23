@@ -45,29 +45,18 @@ namespace BlackJack2D
         }
 
         private static Random rng = new Random();
-        public static PokerDeck ShuffleDeck(PokerDeck Deck)
+        public void ShuffleDeck()
         {
-            for (int i = 1; i < 53; i++)
+            Random rng = new Random();
+            int deckSize = Deck.Count;
+
+            for (int i = 0; i < deckSize; i++)
             {
-                int TempRandomNumber = rng.Next(0, 52);
-                PokerCard Temp = Deck.Deck[TempRandomNumber];
-                Deck.Deck.Remove(Deck.Deck[TempRandomNumber]);
-                Deck.Deck.Add(Temp);
+                int randomIndex = rng.Next(i, deckSize);
+                PokerCard temp = Deck[i];
+                Deck[i] = Deck[randomIndex];
+                Deck[randomIndex] = temp;
             }
-            for (int i = 1; i < 27; i++)
-            {
-                PokerCard Temp = Deck.Deck[i];
-                Deck.Deck.Remove(Deck.Deck[i]);
-                Deck.Deck.Add(Temp);
-            }
-            for (int i = 1; i < 53; i++)
-            {
-                int TempRandomNumber = rng.Next(0, 52);
-                PokerCard Temp = Deck.Deck[TempRandomNumber];
-                Deck.Deck.Remove(Deck.Deck[TempRandomNumber]);
-                Deck.Deck.Add(Temp);
-            }
-            return Deck;
         }
 
         public static void WriteDeck(PokerDeck Deck)

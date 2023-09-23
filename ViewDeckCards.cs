@@ -38,7 +38,7 @@ namespace BlackJack2D
         public static void ShuffleDeckFunction()
         {
             Sprite2D.ClearSprites();
-            BlackJack2DCode.NewPokerDeck = PokerDeck.ShuffleDeck(BlackJack2DCode.NewPokerDeck);
+            BlackJack2DCode.NewPokerDeck.ShuffleDeck();
             ViewDeckCardsFunction();
         }
 

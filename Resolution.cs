@@ -33,9 +33,7 @@ namespace BlackJack2D
         }
         public static void MakeResolution()
         {
-            ScreenResolution.x = 1000;
-            ScreenResolution.y = 500;
-            //made for 2048, 1152
+            // Made for 2048, 1152
             new Resolution(new Vector2(200, 100), new Vector2(850, 520), "ViewDeckCardsButton");
             new Resolution(new Vector2(200, 100), new Vector2(350, 900), "ShuffleDeckButton");
             new Resolution( new Vector2(200, 100), new Vector2(1300, 900), "BackButton");
@@ -102,6 +100,7 @@ namespace BlackJack2D
             {
                 if (resolution.Id == "DrawAllCards")
                 {
+                    Console.WriteLine("retruning");
                     return resolution;
                 }
             }
