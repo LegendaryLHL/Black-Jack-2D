@@ -80,7 +80,7 @@ namespace BlackJack2D
         }
         public bool IsColiding(string tag)
         {
-            foreach (Sprite2D b in GameEngine.AllSprite)
+            foreach (Sprite2D b in GameEngine.AllSprites.Values)
             {
                 if (b.Tag == tag)
                 {
@@ -98,7 +98,7 @@ namespace BlackJack2D
 
         public static bool CursorIsOnStripe(string tag)
         {
-            foreach (Sprite2D b in GameEngine.AllSprite)
+            foreach (Sprite2D b in GameEngine.AllSprites.Values)
             {
                 if (b.Tag == tag)
                 {
@@ -120,8 +120,8 @@ namespace BlackJack2D
         }
         public static void ClearSprites()
         {
-            GameEngine.AllSprite.Clear();
-            GameEngine.AllText.Clear();
+            GameEngine.AllSprites.Clear();
+            GameEngine.AllTexts.Clear();
             GameEngine.AllShapes.Clear();
         }
     }

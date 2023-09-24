@@ -59,6 +59,7 @@ namespace BlackJack2D
             }
         }
 
+        // Debug
         public static void WriteDeck(PokerDeck Deck)
         {
             int count = 1;

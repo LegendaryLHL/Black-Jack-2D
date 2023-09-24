@@ -12,12 +12,14 @@ namespace BlackJack2D
         public Vector2 Position = null;
         public string TextString;
         public Font Font;
+        public string Tag;
 
-        public Text(string TextString, Font Font, Vector2 Position)
+        public Text(string TextString, Font Font, Vector2 Position, string Tag = "not set")
         {
             this.TextString = TextString;
             this.Font = Font;
             this.Position = Position;
+            this.Tag = Tag;
 
             GameEngine.RegisterText(this);
         }
