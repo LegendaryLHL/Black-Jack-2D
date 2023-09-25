@@ -8,6 +8,12 @@ using System.Windows.Forms;
 
 namespace BlackJack2D
 {
+    /*
+     * TODO:
+     * Make a class to extend Sprite2D, Shape2D, Text
+     * avoid mentioning sprite, shape and text when drawing
+     */
+
     public class Sprite2D
     {
         public Vector2 Position = null;
