@@ -335,157 +335,157 @@ namespace BlackJack2D
             if (Sprite2D.CursorIsOnStripe("HitButton") && ButtonHover == "")
             {
                 ButtonHover = "HitButton";
-                BlackJack2DCode.HitButton.DestroySelf();
-                BlackJack2DCode.HitButtonHover = new Sprite2D("HitButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("HitButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("HitButtonHover") && ButtonHover == "HitButton")
             {
                 ButtonHover = "";
-                BlackJack2DCode.HitButtonHover.DestroySelf();
-                BlackJack2DCode.HitButton = new Sprite2D("HitButton");
+                AllSprites["HitButtonHover"].DestroySelf();
+                new Sprite2D("HitButton");
             }
             //Stay Button Hover
             if (Sprite2D.CursorIsOnStripe("StayButton") && ButtonHover == "")
             {
                 ButtonHover = "StayButton";
-                BlackJack2DCode.StayButton.DestroySelf();
-                BlackJack2DCode.StayButtonHover = new Sprite2D("StayButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("StayButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("StayButtonHover") && ButtonHover == "StayButton")
             {
                 ButtonHover = "";
-                BlackJack2DCode.StayButtonHover.DestroySelf();
-                BlackJack2DCode.StayButton = new Sprite2D("StayButton");
+                AllSprites["StayButtonHover"].DestroySelf();
+                new Sprite2D("StayButton");
             }
             //_0 Hover
             if (Sprite2D.CursorIsOnStripe("_0") && ButtonHover == "")
             {
                 ButtonHover = "_0";
-                BlackJack2DCode._0.DestroySelf();
-                BlackJack2DCode._0Hover = new Sprite2D("_0Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_0Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_0Hover") && ButtonHover == "_0")
             {
                 ButtonHover = "";
-                BlackJack2DCode._0Hover.DestroySelf();
-                 BlackJack2DCode._0 = new Sprite2D("_0");
+                AllSprites["_0Hover"].DestroySelf();
+                new Sprite2D("_0");
             }
             //_50 Hover
             if (Sprite2D.CursorIsOnStripe("_50") && ButtonHover == "")
             {
                 ButtonHover = "_50";
-                BlackJack2DCode._50.DestroySelf();
-                BlackJack2DCode._50Hover = new Sprite2D("_50Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_50Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_50Hover") && ButtonHover == "_50")
             {
                 ButtonHover = "";
-                BlackJack2DCode._50Hover.DestroySelf();
-                BlackJack2DCode._50 = new Sprite2D("_50");
+                AllSprites["_50Hover"].DestroySelf();
+                new Sprite2D("_50");
             }
             //_100 Hover
             if (Sprite2D.CursorIsOnStripe("_100") && ButtonHover == "")
             {
                 ButtonHover = "_100";
-                BlackJack2DCode._100.DestroySelf();
-                BlackJack2DCode._100Hover = new Sprite2D("_100Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_100Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_100Hover") && ButtonHover == "_100")
             {
                 ButtonHover = "";
-                BlackJack2DCode._100Hover.DestroySelf();
-                BlackJack2DCode._100 = new Sprite2D("_100");
+                AllSprites["_100Hover"].DestroySelf();
+                new Sprite2D("_100");
             }
             //_200 Hover
             if (Sprite2D.CursorIsOnStripe("_200") && ButtonHover == "")
             {
                 ButtonHover = "_200";
-                BlackJack2DCode._200.DestroySelf();
-                BlackJack2DCode._200Hover = new Sprite2D("_200Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_200Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_200Hover") && ButtonHover == "_200")
             {
                 ButtonHover = "";
-                BlackJack2DCode._200Hover.DestroySelf();
-                BlackJack2DCode._200 = new Sprite2D("_200");
+                AllSprites["_200Hover"].DestroySelf();
+                new Sprite2D("_200");
             }
             //_500 Hover
             if (Sprite2D.CursorIsOnStripe("_500") && ButtonHover == "")
             {
                 ButtonHover = "_500";
-                BlackJack2DCode._500.DestroySelf();
-                BlackJack2DCode._500Hover = new Sprite2D("_500Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_500Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_500Hover") && ButtonHover == "_500")
             {
                 ButtonHover = "";
-                BlackJack2DCode._500Hover.DestroySelf();
-                BlackJack2DCode._500 = new Sprite2D("_500");
+                AllSprites["_500Hover"].DestroySelf();
+                new Sprite2D("_500");
             }
             //_1000 Hover
             if (Sprite2D.CursorIsOnStripe("_1000") && ButtonHover == "")
             {
                ButtonHover = "_1000";
-               BlackJack2DCode._1000.DestroySelf();
-               BlackJack2DCode._1000Hover = new Sprite2D("_1000Hover");
+                AllSprites[ButtonHover].DestroySelf();
+               new Sprite2D("_1000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_1000Hover") && ButtonHover == "_1000")
             {
                 ButtonHover = "";
-                BlackJack2DCode._1000Hover.DestroySelf();
-                BlackJack2DCode._1000 = new Sprite2D("_1000");
+                AllSprites["_1000Hover"].DestroySelf();
+                new Sprite2D("_1000");
             }
             //_5000 Hover
             if (Sprite2D.CursorIsOnStripe("_5000") && ButtonHover == "")
             {
                 ButtonHover = "_5000";
-                BlackJack2DCode._5000.DestroySelf();
-                BlackJack2DCode._5000Hover = new Sprite2D("_5000Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_5000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_5000Hover") && ButtonHover == "_5000")
             {
                 ButtonHover = "";
-                BlackJack2DCode._5000Hover.DestroySelf();
-                BlackJack2DCode._5000 = new Sprite2D("_5000");
+                AllSprites["_5000Hover"].DestroySelf();
+                new Sprite2D("_5000");
             }
             //_10000 hover
             if (Sprite2D.CursorIsOnStripe("_10000") && ButtonHover == "")
             {
                 ButtonHover = "_10000";
-                BlackJack2DCode._10000.DestroySelf();
-                BlackJack2DCode._10000Hover = new Sprite2D("_10000Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_10000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_10000Hover") && ButtonHover == "_10000")
             {
                 ButtonHover = "";
-                BlackJack2DCode._10000Hover.DestroySelf();
-                BlackJack2DCode._10000 = new Sprite2D("_10000");
+                AllSprites["_10000Hover"].DestroySelf();
+                new Sprite2D("_10000");
             }
             //_100000
             if (Sprite2D.CursorIsOnStripe("_100000") && ButtonHover == "")
             {
                 ButtonHover = "_100000";
-                BlackJack2DCode._100000.DestroySelf();
-                BlackJack2DCode._100000Hover = new Sprite2D("_100000Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_100000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_100000Hover") && ButtonHover == "_100000")
             {
                 ButtonHover = "";
-                BlackJack2DCode._100000Hover.DestroySelf();
-                BlackJack2DCode._100000 = new Sprite2D("_100000");
+                AllSprites["_100000Hover"].DestroySelf();
+                new Sprite2D("_100000");
             }
             //_1000000 Hover
             if (Sprite2D.CursorIsOnStripe("_1000000") && ButtonHover == "")
             {
                 ButtonHover = "_1000000";
-                BlackJack2DCode._1000000.DestroySelf();
-                BlackJack2DCode._1000000Hover = new Sprite2D("_1000000Hover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("_1000000Hover");
             }
             if (!Sprite2D.CursorIsOnStripe("_1000000Hover") && ButtonHover == "_1000000")
             {
                 ButtonHover = "";
-                BlackJack2DCode._1000000Hover.DestroySelf();
-                BlackJack2DCode._1000000 = new Sprite2D("_1000000");
+                AllSprites["_1000000Hover"].DestroySelf();
+                new Sprite2D("_1000000");
             }
             
         }
