@@ -11,14 +11,6 @@ namespace BlackJack2D
     class BlackJack2DGame : GameEngine
     {
         string ButtonHover = "";
-        public static Sprite2D ViewDeckCardsButton;
-        public static Sprite2D ViewDeckCardsButtonHover;
-        public static Sprite2D PlayButton;
-        public static Sprite2D PlayButtonHover;
-        public static Sprite2D QuitButton;
-        public static Sprite2D QuitButtonHover;
-        public static Sprite2D ShopButton;
-        public static Sprite2D ShopButtonHover;
         public BlackJack2DGame() : base(new Vector2(625, 512), ("Black Jack 2D")) { }
 
         public override void OnInitialise()
@@ -71,6 +63,7 @@ namespace BlackJack2D
             //Shuffle Cards Button Up
             if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnStripe("ShuffleDeckButtonHover"))
             {
+                ButtonHover = "";
                 ViewDeckCards.ShuffleDeckFunction();
             }
             //Back Button Up
@@ -219,11 +212,16 @@ namespace BlackJack2D
         public static void Menu()
         {
             Sprite2D.ClearSprites();
-            ViewDeckCardsButton = new Sprite2D("ViewDeckCardsButton");
-            PlayButton = new Sprite2D("PlayButton");
-            QuitButton = new Sprite2D("QuitButton");
-            ShopButton = new Sprite2D("ShopButton");
+            new Sprite2D("ViewDeckCardsButton");
+            new Sprite2D("PlayButton");
+            new Sprite2D("QuitButton");
+            new Sprite2D("ShopButton");
         }
+
+        /*
+         * TODO:
+         * Make button class to fix the repeating code
+         */
 
         public void CheakHover()
         {
@@ -231,105 +229,106 @@ namespace BlackJack2D
             if (Sprite2D.CursorIsOnStripe("ViewDeckCardsButton") && ButtonHover == "")
             {
                 ButtonHover = "ViewDeckCardsButton";
-                ViewDeckCardsButton.DestroySelf();
-                ViewDeckCardsButtonHover = new Sprite2D("ViewDeckCardsButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("ViewDeckCardsButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ViewDeckCardsButtonHover") && ButtonHover == "ViewDeckCardsButton")
             {
                 ButtonHover = "";
-                ViewDeckCardsButtonHover.DestroySelf();
-                ViewDeckCardsButton = new Sprite2D("ViewDeckCardsButton");
+                AllSprites["ViewDeckCardsButtonHover"].DestroySelf();
+                new Sprite2D("ViewDeckCardsButton");
             }
             //Shuffle Deck Button Hover
             if (Sprite2D.CursorIsOnStripe("ShuffleDeckButton") && ButtonHover == "")
             {
-                ButtonHover = ButtonHover = "ShuffleDeckButton";
-                ViewDeckCards.ShuffleDeckButton.DestroySelf();
-                ViewDeckCards.ShuffleDeckButtonHover = new Sprite2D("ShuffleDeckButtonHover");
+                ButtonHover = "ShuffleDeckButton";
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("ShuffleDeckButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ShuffleDeckButtonHover") && ButtonHover == "ShuffleDeckButton")
             {
                 ButtonHover = "";
-                ViewDeckCards.ShuffleDeckButtonHover.DestroySelf();
-                ViewDeckCards.ShuffleDeckButton = new Sprite2D("ShuffleDeckButton");
+                Console.WriteLine(AllSprites["ShuffleDeckButtonHover"].Tag);
+                AllSprites["ShuffleDeckButtonHover"].DestroySelf();
+                new Sprite2D("ShuffleDeckButton");
             }
             //Back Button Hover
             if (Sprite2D.CursorIsOnStripe("BackButton") && ButtonHover == "")
             {
                 ButtonHover = "BackButton";
-                ViewDeckCards.BackButton.DestroySelf();
-                ViewDeckCards.BackButtonHover = new Sprite2D("BackButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("BackButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("BackButtonHover") && ButtonHover == "BackButton")
             {
                 ButtonHover = "";
-                ViewDeckCards.BackButtonHover.DestroySelf();
-                ViewDeckCards.BackButton = new Sprite2D("BackButton");
+                AllSprites["BackButtonHover"].DestroySelf();
+                new Sprite2D("BackButton");
             }
             //Rearrange Button Hover
             if (Sprite2D.CursorIsOnStripe("RearrangeButton") && ButtonHover == "")
             {
                 ButtonHover = "RearrangeButton";
-                ViewDeckCards.RearrangeButton.DestroySelf();
-                ViewDeckCards.RearrangeButtonHover = new Sprite2D("RearrangeButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("RearrangeButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("RearrangeButtonHover") && ButtonHover == "RearrangeButton")
             {
                 ButtonHover = "";
-                ViewDeckCards.RearrangeButtonHover.DestroySelf();
-                ViewDeckCards.RearrangeButton = new Sprite2D("RearrangeButton");
+                AllSprites["RearrangeButtonHover"].DestroySelf();
+                new Sprite2D("RearrangeButton");
             }
             //Play Button Hover
             if (Sprite2D.CursorIsOnStripe("PlayButton") && ButtonHover == "")
             {
                 ButtonHover = "PlayButton";
-                PlayButton.DestroySelf();
-                PlayButtonHover = new Sprite2D("PlayButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("PlayButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("PlayButtonHover") && ButtonHover == "PlayButton")
             {
                 ButtonHover = "";
-                PlayButtonHover.DestroySelf();
-                PlayButton = new Sprite2D("PlayButton");
+                AllSprites["PlayButtonHover"].DestroySelf();
+                new Sprite2D("PlayButton");
             }
             //Quit Button Hover
             if (Sprite2D.CursorIsOnStripe("QuitButton") && ButtonHover == "")
             {
                 ButtonHover = "QuitButton";
-                QuitButton.DestroySelf();
-                QuitButtonHover = new Sprite2D("QuitButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("QuitButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("QuitButtonHover") && ButtonHover == "QuitButton")
             {
                 ButtonHover = "";
-                QuitButtonHover.DestroySelf();
-                QuitButton = new Sprite2D("QuitButton");
+                AllSprites["QuitButtonHover"].DestroySelf();
+                new Sprite2D("QuitButton");
             }
             //Shop Button Hover
             if (Sprite2D.CursorIsOnStripe("ShopButton") && ButtonHover == "")
             {
                 ButtonHover = "ShopButton";
-                ShopButton.DestroySelf();
-                ShopButtonHover = new Sprite2D("ShopButtonHover");
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("ShopButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("ShopButtonHover") && ButtonHover == "ShopButton")
             {
                 ButtonHover = "";
-                ShopButtonHover.DestroySelf();
-                ShopButton = new Sprite2D("ShopButton");
+                AllSprites["ShopButtonHover"].DestroySelf();
+                new Sprite2D("ShopButton");
             }
             //Upgrade Button Hover
             if (Sprite2D.CursorIsOnStripe("UpgradeButton") && ButtonHover == "")
             {
-                    ButtonHover = "UpgradeButton";
-                    Shop.UpgradeButton.DestroySelf();
-                    Shop.UpgradeButtonHover = new Sprite2D("UpgradeButtonHover");
+                ButtonHover = "UpgradeButton";
+                AllSprites[ButtonHover].DestroySelf();
+                new Sprite2D("UpgradeButtonHover");
             }
             if (!Sprite2D.CursorIsOnStripe("UpgradeButtonHover") && ButtonHover == "UpgradeButton")
             {
                 ButtonHover = "";
-                Shop.UpgradeButtonHover.DestroySelf();
-                Shop.UpgradeButton = new Sprite2D("UpgradeButton");
+                AllSprites["UpgradeButtonHover"].DestroySelf();
+                new Sprite2D("UpgradeButton");
             }
             //Hit Button Hover
             if (Sprite2D.CursorIsOnStripe("HitButton") && ButtonHover == "")

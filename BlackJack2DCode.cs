@@ -41,7 +41,7 @@ namespace BlackJack2D
             new Sprite2D("_10000");
             new Sprite2D("_100000");
             new Sprite2D("_1000000");
-            ViewDeckCards.BackButton = new Sprite2D("BackButton");
+            new Sprite2D("BackButton");
         }
         public static void BlackJack()
         {
@@ -173,7 +173,7 @@ namespace BlackJack2D
 
             GameEngine.AllSprites["HitButton"].DestroySelf();
             GameEngine.AllSprites["StayButtonHover"].DestroySelf();
-            ViewDeckCards.BackButton = new Sprite2D("BackButton");
+            new Sprite2D("BackButton");
             if (YourTotal > DealerTotal && YourTotal <= 21)
             {
                 //win
