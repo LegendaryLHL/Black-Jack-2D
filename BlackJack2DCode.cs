@@ -12,32 +12,6 @@ namespace BlackJack2D
 {
     class BlackJack2DCode
     {
-        public static Sprite2D HitButton;
-        public static Sprite2D HitButtonHover;
-        public static Sprite2D StayButton;
-        public static Sprite2D StayButtonHover;
-        public static Sprite2D _0;
-        public static Sprite2D _50;
-        public static Sprite2D _100;
-        public static Sprite2D _200;
-        public static Sprite2D _500;
-        public static Sprite2D _1000;
-        public static Sprite2D _5000;
-        public static Sprite2D _10000;
-        public static Sprite2D _100000;
-        public static Sprite2D _1000000;
-        public static Sprite2D _0Hover;
-        public static Sprite2D _50Hover;
-        public static Sprite2D _100Hover;
-        public static Sprite2D _200Hover;
-        public static Sprite2D _500Hover;
-        public static Sprite2D _1000Hover;
-        public static Sprite2D _5000Hover;
-        public static Sprite2D _10000Hover;
-        public static Sprite2D _100000Hover;
-        public static Sprite2D _1000000Hover;
-        public static Sprite2D BackCard;
-
         public static int BetAmount = 0;
         public static int Money = 0;
         public static int State = 1;
@@ -57,17 +31,17 @@ namespace BlackJack2D
             Sprite2D.ClearSprites();
             new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
             new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
-            _0 = new Sprite2D("_0");
-            _50 = new Sprite2D("_50");
-            _100 = new Sprite2D("_100");
-            _200 = new Sprite2D("_200");
-            _500 = new Sprite2D("_500");
-            _1000 = new Sprite2D("_1000");
-            _5000 = new Sprite2D("_5000");
-            _10000 = new Sprite2D("_10000");
-            _100000 = new Sprite2D("_100000");
-            _1000000 = new Sprite2D("_1000000");
-            ViewDeckCards.BackButton = new Sprite2D("BackButton");
+            new Sprite2D("_0");
+            new Sprite2D("_50");
+            new Sprite2D("_100");
+            new Sprite2D("_200");
+            new Sprite2D("_500");
+            new Sprite2D("_1000");
+            new Sprite2D("_5000");
+            new Sprite2D("_10000");
+            new Sprite2D("_100000");
+            new Sprite2D("_1000000");
+            new Sprite2D("BackButton");
         }
         public static void BlackJack()
         {
@@ -85,11 +59,11 @@ namespace BlackJack2D
                 NewPokerDeck.Deck.Add(Temp);
             }
 
-            HitButton = new Sprite2D("HitButton");
-            StayButton = new Sprite2D("StayButton");
+            new Sprite2D("HitButton");
+            new Sprite2D("StayButton");
 
             NewPokerDeck.Deck[0].DrawCard("DealerFirstCard");
-            BackCard = new Sprite2D(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
+            new Sprite2D(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
 
             NewPokerDeck.Deck[5].DrawCard("YourFirstCard");
             NewPokerDeck.Deck[6].DrawCard("YourSecondCard");
@@ -110,7 +84,7 @@ namespace BlackJack2D
 
         public static void StayFunction()
         {
-            BackCard.DestroySelf();
+            GameEngine.AllSprites["PokerCardBack"].DestroySelf();
             NewPokerDeck.Deck[1].DrawCard("DealerSecondCard");
             DealerTotal = NewPokerDeck.Deck[0].CardValue + NewPokerDeck.Deck[1].CardValue;
             DealerState = 1;
@@ -197,9 +171,9 @@ namespace BlackJack2D
                 }
             }
 
-            HitButton.DestroySelf();
-            StayButtonHover.DestroySelf();
-            ViewDeckCards.BackButton = new Sprite2D("BackButton");
+            GameEngine.AllSprites["HitButton"].DestroySelf();
+            GameEngine.AllSprites["StayButtonHover"].DestroySelf();
+            new Sprite2D("BackButton");
             if (YourTotal > DealerTotal && YourTotal <= 21)
             {
                 //win

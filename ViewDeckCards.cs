@@ -8,19 +8,13 @@ namespace BlackJack2D
 {
     class ViewDeckCards
     {
-        public static Sprite2D ShuffleDeckButton;
-        public static Sprite2D ShuffleDeckButtonHover;
-        public static Sprite2D BackButton;
-        public static Sprite2D BackButtonHover;
-        public static Sprite2D RearrangeButton;
-        public static Sprite2D RearrangeButtonHover;
         public static void ViewDeckCardsFunction()
         {
             Sprite2D.ClearSprites();
             DrawAllCards();
-            ShuffleDeckButton = new Sprite2D("ShuffleDeckButton");
-            BackButton = new Sprite2D("BackButton");
-            RearrangeButton = new Sprite2D("RearrangeButton");
+            new Sprite2D("ShuffleDeckButton");
+            new Sprite2D("BackButton");
+            new Sprite2D("RearrangeButton");
         }
         public static void DrawAllCards()
         {
