@@ -11,7 +11,7 @@ namespace BlackJack2D
     public class Resolution
     {
         public string Id { get; set; } //same as tag in sprite
-        public static List<Resolution> Resolutions = new List<Resolution>();
+        public static Dictionary<string, Resolution> Resolutions = new Dictionary<string, Resolution>();
         public Vector2 Position { get; set; }
         public Vector2 Scale { get; set; }
 
@@ -23,13 +23,13 @@ namespace BlackJack2D
             Scale = scale;
             Position = position;
             Id = id;
-            Resolutions.Add(ScaleResolution(this));
+            Resolutions[id] = ScaleResolution(this);
         }
         public Resolution(Vector2 scale, Vector2 position)
         {
             Scale = scale;
             Position = position;
-            Resolutions.Add(ScaleResolution(this));
+            Resolutions["Tag not set"] = ScaleResolution(this);
         }
         public static void MakeResolution()
         {
@@ -78,7 +78,7 @@ namespace BlackJack2D
 
         public static Resolution GetResolution(string id)
         {
-            foreach (Resolution resolution in Resolutions)
+            foreach (Resolution resolution in Resolutions.Values)
             {
                 if (resolution.Id == id)
                 {
@@ -87,7 +87,7 @@ namespace BlackJack2D
             }
 
             //hover temp fix later
-            foreach (Resolution resolution in Resolutions)
+            foreach (Resolution resolution in Resolutions.Values)
             {
                 if (resolution.Id == id.Replace("Hover", ""))
                 {
@@ -96,7 +96,7 @@ namespace BlackJack2D
             }
 
             //how to fix this
-            foreach (Resolution resolution in Resolutions)
+            foreach (Resolution resolution in Resolutions.Values)
             {
                 if (resolution.Id == "DrawAllCards")
                 {

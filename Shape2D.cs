@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlackJack2D
 {
+    // NOt finished
     public class Shape2D
     {
         public Vector2 Position = null;
