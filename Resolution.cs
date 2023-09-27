@@ -15,7 +15,7 @@ namespace BlackJack2D
         public Vector2 Position { get; set; }
         public Vector2 Scale { get; set; }
 
-        private static Vector2 ScreenResolution = new Vector2(System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width, System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height);
+        public static Vector2 ScreenResolution = new Vector2(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
         private static Vector2 OriginalResolution = new Vector2(2048,1152);
 
         public Resolution(Vector2 scale, Vector2 position, string id)

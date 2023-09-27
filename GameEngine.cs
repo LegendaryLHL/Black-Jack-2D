@@ -51,6 +51,7 @@ namespace BlackJack2D
             Window.MouseHover += Window_MouseHover;
             Window.MouseMove += Window_MouseMove;
             Window.FormClosing += Window_FormClosing;
+            Window.Resize += Window_Resize;
             Window.WindowState = WindowStateSize;
             GameLoopThread = new Thread(GameLoop);
             GameLoopThread.Start();
@@ -95,6 +96,10 @@ namespace BlackJack2D
         private void Window_KeyUP(object sender, KeyEventArgs e)
         {
             GetKeyUp(e);
+        }
+        private void Window_Resize(object sender, EventArgs e)
+        {
+            WindowResize(e);
         }
 
         public static void RegisterShape(Shape2D Shape)
@@ -180,6 +185,7 @@ namespace BlackJack2D
         public abstract void GetMouseUp(MouseEventArgs e);
         public abstract void GetMouseHover(EventArgs e);
         public abstract void GetMouseMove(EventArgs e);
+        public abstract void WindowResize(EventArgs e);
 
     }
 }
