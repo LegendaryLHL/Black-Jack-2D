@@ -22,7 +22,7 @@ namespace BlackJack2D
             this.Directory = Directory;
             this.Tag = Tag;
 
-            Image temp = Image.FromFile($"Assets/{Directory}.png");
+            Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
             Sprite = sprite;
 
@@ -35,7 +35,7 @@ namespace BlackJack2D
             Directory = Tag;
             this.Tag = Tag;
 
-            Image temp = Image.FromFile($"Assets/{Directory}.png");
+            Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
             Sprite = sprite;
 
@@ -46,7 +46,7 @@ namespace BlackJack2D
             this.IsRefrence = IsRefrence;
             this.Directory = Directory;
 
-            Image temp = Image.FromFile($"Assets/{Directory}.png");
+            Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp);
             Sprite = sprite;
 
@@ -70,8 +70,8 @@ namespace BlackJack2D
             Directory = Tag;
             this.Tag = Tag;
 
-            Image temp = Image.FromFile($"Assets/{Directory}.png");
-            Bitmap sprite = new Bitmap(temp, (int)Scale.x, (int)Scale.y);
+            Image img = Image.FromFile($"../../Assets/Images/{Directory}.png");
+            Bitmap sprite = new Bitmap(img, (int)Scale.x, (int)Scale.y);
             Sprite = sprite;
 
             GameEngine.RegisterGraphicElement(this);
