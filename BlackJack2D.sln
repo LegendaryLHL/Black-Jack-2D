@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackJack2D", "BlackJack2D.csproj", "{34F389F9-AD7B-4021-938C-DA8841EFF91B}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BlackJack2D_Setup", "..\BlackJack2D_Setup\BlackJack2D_Setup.vdproj", "{43E83FA6-AC81-4807-85E8-5B0729123EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +15,6 @@ Global
 		{34F389F9-AD7B-4021-938C-DA8841EFF91B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34F389F9-AD7B-4021-938C-DA8841EFF91B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34F389F9-AD7B-4021-938C-DA8841EFF91B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43E83FA6-AC81-4807-85E8-5B0729123EF1}.Debug|Any CPU.ActiveCfg = Debug
-		{43E83FA6-AC81-4807-85E8-5B0729123EF1}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
