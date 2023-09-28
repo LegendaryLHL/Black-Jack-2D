@@ -5,28 +5,20 @@ using System.Text;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Policy;
 
 namespace BlackJack2D
 {
-    /*
-     * TODO:
-     * Make a class to extend Sprite2D, Shape2D, Text
-     * avoid mentioning sprite, shape and text when drawing
-     */
-
-    public class Sprite2D
+    public class Sprite2D : GraphicElement
     {
-        public Vector2 Position = null;
-        public Vector2 Scale = null;
         public string Directory = null;
-        public string Tag = "";
         public Bitmap Sprite = null;
         public bool IsRefrence = false;
 
         public Sprite2D(Resolution resolution, string Directory, string Tag)
         {
-            this.Position = resolution.Position;
-            this.Scale = resolution.Scale;
+            Position = resolution.Position;
+            Scale = resolution.Scale;
             this.Directory = Directory;
             this.Tag = Tag;
 
@@ -34,20 +26,20 @@ namespace BlackJack2D
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
             Sprite = sprite;
 
-            GameEngine.RegisterSprite(this);
+            GameEngine.RegisterGraphicElement(this);
         }
         public Sprite2D(Resolution resolution, string Tag)
         {
-            this.Position = resolution.Position;
-            this.Scale = resolution.Scale;
-            this.Directory = Tag;
+            Position = resolution.Position;
+            Scale = resolution.Scale;
+            Directory = Tag;
             this.Tag = Tag;
 
             Image temp = Image.FromFile($"Assets/{Directory}.png");
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
             Sprite = sprite;
 
-            GameEngine.RegisterSprite(this);
+            GameEngine.RegisterGraphicElement(this);
         }
         public Sprite2D(string Directory, bool IsRefrence)
         {
@@ -58,77 +50,39 @@ namespace BlackJack2D
             Bitmap sprite = new Bitmap(temp);
             Sprite = sprite;
 
-            GameEngine.RegisterSprite(this);
+            GameEngine.RegisterGraphicElement(this);
         }
         public Sprite2D(Resolution resolution, Bitmap Refrence, string Tag)
         {
-            this.Position = resolution.Position;
-            this.Scale = resolution.Scale;
+            Position = resolution.Position;
+            Scale = resolution.Scale;
             this.Tag = Tag;
 
             Sprite = Refrence;
 
-            GameEngine.RegisterSprite(this);
+            GameEngine.RegisterGraphicElement(this);
         }
         public Sprite2D(string Tag)
         {
             Resolution resolutionInstance = Resolution.GetResolution(Tag);
-            this.Position = resolutionInstance.Position;
-            this.Scale = resolutionInstance.Scale;
-            this.Directory = Tag;
+            Position = resolutionInstance.Position;
+            Scale = resolutionInstance.Scale;
+            Directory = Tag;
             this.Tag = Tag;
 
             Image temp = Image.FromFile($"Assets/{Directory}.png");
-            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+            Bitmap sprite = new Bitmap(temp, (int)Scale.x, (int)Scale.y);
             Sprite = sprite;
 
-            GameEngine.RegisterSprite(this);
-        }
-        public bool IsColiding(string tag)
-        {
-            foreach (Sprite2D b in GameEngine.AllSprites.Values)
-            {
-                if (b.Tag == tag)
-                {
-                    if (Position.x < b.Position.x + b.Scale.x &&
-                        Position.x + Scale.x > b.Position.x &&
-                        Position.y < b.Position.y + b.Scale.y &&
-                        Position.y + Scale.y > b.Position.y)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            GameEngine.RegisterGraphicElement(this);
         }
 
-        public static bool CursorIsOnStripe(string tag)
+        public override void Draw(Graphics g)
         {
-            foreach (Sprite2D b in GameEngine.AllSprites.Values)
+            if (!IsRefrence)
             {
-                if (b.Tag == tag)
-                {
-                    if (Cursor.Position.X < b.Position.x + b.Scale.x &&
-                        Cursor.Position.Y < b.Position.y + b.Scale.y &&
-                        Cursor.Position.X > b.Position.x &&
-                        Cursor.Position.Y > b.Position.y)
-                    {
-                        return true;
-                    }
-                }
+                g.DrawImage(Sprite, Position.x, Position.y - 28, Scale.x, Scale.y);
             }
-            return false;
-        }
-
-        public void DestroySelf()
-        {
-            GameEngine.UnRegisterSprite(this);
-        }
-        public static void ClearSprites()
-        {
-            GameEngine.AllSprites.Clear();
-            GameEngine.AllTexts.Clear();
-            GameEngine.AllShapes.Clear();
         }
     }
 }

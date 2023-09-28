@@ -7,12 +7,10 @@ using System.Drawing;
 
 namespace BlackJack2D
 {
-    public class Text
+    public class Text : GraphicElement
     {
-        public Vector2 Position = null;
         public string TextString;
         public Font Font;
-        public string Tag;
 
         public Text(string TextString, Font Font, Vector2 Position, string Tag = "not set")
         {
@@ -21,11 +19,12 @@ namespace BlackJack2D
             this.Position = Position;
             this.Tag = Tag;
 
-            GameEngine.RegisterText(this);
+            GameEngine.RegisterGraphicElement(this);
         }
-        public void DestroySelf()
+
+        public override void Draw(Graphics g)
         {
-            GameEngine.UnRegisterText(this);
+            g.DrawString(TextString, Font, new SolidBrush(Color.Black), Position.x, Position.y);
         }
     }
 }

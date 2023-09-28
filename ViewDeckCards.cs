@@ -10,7 +10,7 @@ namespace BlackJack2D
     {
         public static void ViewDeckCardsFunction()
         {
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             DrawAllCards();
             new Sprite2D("ShuffleDeckButton");
             new Sprite2D("BackButton");
@@ -31,21 +31,21 @@ namespace BlackJack2D
 
         public static void ShuffleDeckFunction()
         {
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             BlackJack2DCode.NewPokerDeck.ShuffleDeck();
             ViewDeckCardsFunction();
         }
 
         public static void RearrangeFunction()
         {
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             BlackJack2DCode.NewPokerDeck = new PokerDeck();
             ViewDeckCardsFunction();
         }
 
         public static void BackFunction()
         {
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             BlackJack2DGame.Menu();
         }
     }

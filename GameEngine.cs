@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BlackJack2D
 {
@@ -24,9 +20,7 @@ namespace BlackJack2D
         private Canvas Window = null;
         private Thread GameLoopThread = null;
 
-        public static Dictionary<string, Shape2D> AllShapes = new Dictionary<string, Shape2D>();
-        public static Dictionary<string, Sprite2D> AllSprites = new Dictionary<string, Sprite2D>();
-        public static Dictionary<string, Text> AllTexts = new Dictionary<string, Text>();
+        public static Dictionary<string, GraphicElement> AllGraphicElements = new Dictionary<string, GraphicElement>();
 
         public Color BackgroundColour = Color.White;
         public Vector2 CameraPositon = new Vector2(0,0);
@@ -101,33 +95,16 @@ namespace BlackJack2D
         {
             WindowResize(e);
         }
-
-        public static void RegisterShape(Shape2D Shape)
+        
+        public static void RegisterGraphicElement(GraphicElement graphicElements)
         {
-            AllShapes[Shape.Tag] = Shape;
+            AllGraphicElements[graphicElements.Tag] = graphicElements;
         }
-        public static void UnRegisterShape(Shape2D Shape)
+        public static void UnRegisterGraphicElement(GraphicElement graphicElements)
         {
-            AllShapes.Remove(Shape.Tag);
-        }
-
-        public static void RegisterSprite(Sprite2D Sprite)
-        {
-            AllSprites[Sprite.Tag] = Sprite;
-        }
-        public static void UnRegisterSprite(Sprite2D Sprite)
-        {
-            AllSprites.Remove(Sprite.Tag);
+            AllGraphicElements.Remove(graphicElements.Tag);
         }
 
-        public static void RegisterText(Text Text)
-        {
-            AllTexts[Text.Tag] = Text;
-        }
-        public static void UnRegisterText(Text Text)
-        {
-            AllTexts.Remove(Text.Tag);
-        }
 
         void GameLoop()
         {
@@ -157,20 +134,9 @@ namespace BlackJack2D
             g.TranslateTransform(CameraPositon.x, CameraPositon.y);
             g.RotateTransform(CameraAngle);
             g.ScaleTransform(CameraZoom.x, CameraZoom.y);
-            foreach (Shape2D shape in AllShapes.Values)
+            foreach (GraphicElement graphicElement in AllGraphicElements.Values)
             {
-                g.FillRectangle(new SolidBrush(Color.Red), shape.Position.x, shape.Position.y, shape.Scale.x, shape.Scale.y);
-            }
-            foreach (Sprite2D sprite in AllSprites.Values) 
-            {
-                if (!sprite.IsRefrence)
-                {
-                    g.DrawImage(sprite.Sprite, sprite.Position.x, sprite.Position.y - 28, sprite.Scale.x, sprite.Scale.y);
-                }
-            }
-            foreach (Text Text in AllTexts.Values)
-            {
-                g.DrawString(Text.TextString, Text.Font, new SolidBrush(Color.Black), Text.Position.x, Text.Position.y);
+                graphicElement.Draw(g);
             }
         }
 

@@ -28,7 +28,7 @@ namespace BlackJack2D
                 Money = 50;
             }
             //put bet
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
             new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
             new Sprite2D("_0");
@@ -45,7 +45,7 @@ namespace BlackJack2D
         }
         public static void BlackJack()
         {
-            Sprite2D.ClearSprites();
+            GameEngine.AllGraphicElements.Clear();
             for (int i = 0; i < DealerState; i++)
             {
                 PokerCard Temp = NewPokerDeck.Deck[i];
@@ -84,7 +84,7 @@ namespace BlackJack2D
 
         public static void StayFunction()
         {
-            GameEngine.AllSprites["PokerCardBack"].DestroySelf();
+            GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
             NewPokerDeck.Deck[1].DrawCard("DealerSecondCard");
             DealerTotal = NewPokerDeck.Deck[0].CardValue + NewPokerDeck.Deck[1].CardValue;
             DealerState = 1;
@@ -171,8 +171,8 @@ namespace BlackJack2D
                 }
             }
 
-            GameEngine.AllSprites["HitButton"].DestroySelf();
-            GameEngine.AllSprites["StayButtonHover"].DestroySelf();
+            GameEngine.AllGraphicElements["HitButton"].DestroySelf();
+            GameEngine.AllGraphicElements["StayButtonHover"].DestroySelf();
             new Sprite2D("BackButton");
             if (YourTotal > DealerTotal && YourTotal <= 21)
             {

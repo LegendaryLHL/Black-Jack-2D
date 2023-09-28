@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="BlackJack2DCode.cs" />
     <Compile Include="BlackJack2DGame.cs" />
+    <Compile Include="GraphicElement.cs" />
     <Compile Include="GameEngine.cs">
       <SubType>Form</SubType>
     </Compile>

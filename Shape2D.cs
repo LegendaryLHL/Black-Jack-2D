@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,24 +8,21 @@ using System.Threading.Tasks;
 namespace BlackJack2D
 {
     // NOt finished
-    public class Shape2D
+    public class Shape2D : GraphicElement
     {
-        public Vector2 Position = null;
-        public Vector2 Scale = null;
-        public string Tag = "";
-
         public Shape2D(Vector2 Position, Vector2 Scale, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;
             this.Tag = Tag;
 
-            GameEngine.RegisterShape(this);
+            GameEngine.RegisterGraphicElement(this);
         }
 
-        public void DestroySelf()
+
+        public override void Draw(Graphics g)
         {
-            GameEngine.UnRegisterShape(this);
+            g.FillRectangle(new SolidBrush(Color.Red), Position.x, Position.y, Scale.x, Scale.y);
         }
     }
 }
