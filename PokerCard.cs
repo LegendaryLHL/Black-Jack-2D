@@ -12,15 +12,15 @@ namespace BlackJack2D
         public string CardName { get; set; }
         public int CardValue { get; set; }
         public string CardColor { get; set; }
-        public string CardSuit { get; set; }  
-        public bool IsAce {get; set; }
+        public string CardSuit { get; set; }
+        public bool IsAce { get; set; }
         public string CardNameId { get; set; }
         public PokerCard(int CardId, string CardSuit)
         {
-            String[] nameForCards = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10","Jack", "Queen", "King" };
+            string[] nameForCards = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
             this.CardId = CardId;
             this.CardName = nameForCards[CardId - 1];
-            if (CardId == (11 | 12 | 13))
+            if (CardId == 11 || CardId == 12 || CardId == 13)
             {
                 CardValue = 10;
             }
@@ -28,6 +28,7 @@ namespace BlackJack2D
             {
                 CardValue = CardId;
             }
+
             if (CardId == 1)
             {
                 IsAce = true;
@@ -37,7 +38,7 @@ namespace BlackJack2D
             {
                 IsAce = false;
             }
-            
+
             switch (CardSuit)
             {
                 case "Clubs":

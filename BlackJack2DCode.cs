@@ -14,10 +14,8 @@ namespace BlackJack2D
     {
         public static int BetAmount = 0;
         public static int Money = 0;
-        public static int State = 1;
-        public static int DealerTotal = 0;
-        public static int YourTotal = 0;
-        public static int DealerState = 0;
+        public static List<PokerCard> DealerHand;
+        public static List<PokerCard> PlayerHand;
 
         public static PokerDeck NewPokerDeck = new PokerDeck();
         public static void PlayFunction()
@@ -46,147 +44,93 @@ namespace BlackJack2D
         public static void BlackJack()
         {
             GameEngine.AllGraphicElements.Clear();
-            for (int i = 0; i < DealerState; i++)
-            {
-                PokerCard Temp = NewPokerDeck.Deck[i];
-                NewPokerDeck.Deck.Remove(NewPokerDeck.Deck[i]);
-                NewPokerDeck.Deck.Add(Temp);
-            }
-            for (int i = 5; i < State+5; i++)
-            {
-                PokerCard Temp = NewPokerDeck.Deck[i];
-                NewPokerDeck.Deck.Remove(NewPokerDeck.Deck[i]);
-                NewPokerDeck.Deck.Add(Temp);
-            }
+            PlayerHand = new List<PokerCard>();
+            DealerHand = new List<PokerCard>();
 
             new Sprite2D("HitButton");
             new Sprite2D("StayButton");
 
-            NewPokerDeck.Deck[0].DrawCard("DealerFirstCard");
+            for (int i = 0; i < 2; i++)
+            {
+                NewPokerDeck.DrawCardToHand(PlayerHand);
+                NewPokerDeck.DrawCardToHand(DealerHand);
+            }
+
+            DealerHand[0].DrawCard("DealerFirstCard");
             new Sprite2D(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
 
-            NewPokerDeck.Deck[5].DrawCard("YourFirstCard");
-            NewPokerDeck.Deck[6].DrawCard("YourSecondCard");
+            PlayerHand[0].DrawCard("YourFirstCard");
+            PlayerHand[1].DrawCard("YourSecondCard");
         }
 
-        public static void State1Function()
+        public static string NumberToOrder(int number)
         {
-            NewPokerDeck.Deck[7].DrawCard("YourThirdCard");
+            var map = new[] { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
+            return map[number];
         }
-        public static void State2Function()
+        public static void Hit()
         {
-            NewPokerDeck.Deck[8].DrawCard("YourFourthCard");
-        }
-        public static void State3Function()
-        {
-            NewPokerDeck.Deck[9].DrawCard("YourFifthCard");
+            if (PlayerHand.Count < 5)
+            {
+                NewPokerDeck.DrawCardToHand(PlayerHand).DrawCard("Your" + NumberToOrder(PlayerHand.Count) + "Card");
+            }
         }
 
-        public static void StayFunction()
+        public static int CountHandValue(List<PokerCard> hand)
+        {
+            int total = 0;
+            int numberOfAces = 0;
+
+            foreach (var card in hand)
+            {
+                // Count Ace first handle them later
+                if (card.IsAce)
+                {
+                    numberOfAces++;
+                }
+                total += card.CardValue;
+            }
+
+            while (numberOfAces > 0 && total > 21)
+            {
+                total -= 10;
+                numberOfAces--;
+            }
+            return total;
+        }
+        public static void Stay()
         {
             GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
-            NewPokerDeck.Deck[1].DrawCard("DealerSecondCard");
-            DealerTotal = NewPokerDeck.Deck[0].CardValue + NewPokerDeck.Deck[1].CardValue;
-            DealerState = 1;
-            if (DealerTotal < 17)
-            {
-                NewPokerDeck.Deck[2].DrawCard("DealerThirdCard");
-                DealerTotal += NewPokerDeck.Deck[2].CardValue;
-                DealerState = 2;
-            }
-            if (DealerTotal < 17)
-            {
-                NewPokerDeck.Deck[3].DrawCard("DealerFourthCard");
-                DealerTotal += NewPokerDeck.Deck[3].CardValue;
-                DealerState = 3;
-            }
-            if (DealerTotal < 17)
-            {
-                NewPokerDeck.Deck[4].DrawCard("DealerFifthCard");
-                DealerTotal += NewPokerDeck.Deck[4].CardValue;
-                DealerState = 4;
-            }
-            if (DealerTotal > 21)
-            {
-                if (NewPokerDeck.Deck[0].IsAce)
-                {
-                    DealerTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[1].IsAce)
-                {
-                    DealerTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[2].IsAce)
-                {
-                    DealerTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[3].IsAce)
-                {
-                    DealerTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[4].IsAce)
-                {
-                    DealerTotal = -10;
-                }
-            }
+            DealerHand[1].DrawCard("DealerSecondCard");
 
-            if (State == 1)
+            // Dealer draw
+            while (CountHandValue(DealerHand) <= 16 && DealerHand.Count < 5)
             {
-                YourTotal = NewPokerDeck.Deck[5].CardValue + NewPokerDeck.Deck[6].CardValue;
-            }
-            if (State == 2)
-            {
-                YourTotal = NewPokerDeck.Deck[5].CardValue + NewPokerDeck.Deck[6].CardValue + NewPokerDeck.Deck[7].CardValue;
-            }
-            if (State == 3)
-            {
-                YourTotal = NewPokerDeck.Deck[5].CardValue + NewPokerDeck.Deck[6].CardValue + NewPokerDeck.Deck[7].CardValue + NewPokerDeck.Deck[8].CardValue;
-            }
-            if (State == 4)
-            {
-                YourTotal = NewPokerDeck.Deck[5].CardValue + NewPokerDeck.Deck[6].CardValue + NewPokerDeck.Deck[7].CardValue + NewPokerDeck.Deck[8].CardValue + NewPokerDeck.Deck[9].CardValue;
-            }
-
-            if (YourTotal > 21)
-            {
-                if (NewPokerDeck.Deck[5].IsAce)
-                {
-                    YourTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[6].IsAce)
-                {
-                    YourTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[7].IsAce)
-                {
-                    YourTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[8].IsAce)
-                {
-                    YourTotal = -10;
-                }
-                else if (NewPokerDeck.Deck[9].IsAce)
-                {
-                    YourTotal = -10;
-                }
+                NewPokerDeck.DrawCardToHand(DealerHand).DrawCard("Dealer" + NumberToOrder(DealerHand.Count) + "Card");
             }
 
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
             GameEngine.AllGraphicElements["StayButtonHover"].DestroySelf();
             new Sprite2D("BackButton");
-            if (YourTotal > DealerTotal && YourTotal <= 21)
+            if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
             {
                 //win
                 new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
-            else if (YourTotal <= 21 && DealerTotal > 21)
+            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(DealerHand) > 21)
             {
                 //win
                 new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
-            else if (YourTotal <= 21 && YourTotal == DealerTotal)
+            else if (CountHandValue(PlayerHand) <= 21 && PlayerHand.Count == 5)
+            {
+                // Five Card
+                new Text("5-card Charlie!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                Money += BetAmount * 3;
+            }
+            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(PlayerHand) == CountHandValue(DealerHand))
             {
                 //tie
                 new Text("Tie", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
@@ -198,7 +142,16 @@ namespace BlackJack2D
                 Money -= BetAmount;
             }
             WriteMoney();
-            State = 1;
+
+            // Put back the cards
+            foreach (var card in DealerHand)
+            {
+                NewPokerDeck.Deck.Add(card);
+            }
+            foreach (var card in PlayerHand)
+            {
+                NewPokerDeck.Deck.Add(card);
+            }
         }
 
         //writer

@@ -11,7 +11,7 @@ namespace BlackJack2D
         public List<PokerCard> Deck = new List<PokerCard>();
         public PokerDeck()
         {
-            
+
             for (int i = 1; i < 5; i++)
             {
                 switch (i)
@@ -57,6 +57,13 @@ namespace BlackJack2D
                 Deck[i] = Deck[randomIndex];
                 Deck[randomIndex] = temp;
             }
+        }
+        public PokerCard DrawCardToHand(List<PokerCard> hand)
+        {
+            PokerCard card = Deck[0];
+            Deck.Remove(card);
+            hand.Add(card);
+            return card;
         }
 
         // Debug

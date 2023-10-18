@@ -99,26 +99,15 @@ namespace BlackJack2D
                 //upgrade function;
             }
             //Hit Button Up
-            if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("HitButtonHover") && BlackJack2DCode.State == 1)
+            if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("HitButtonHover"))
             {
-                BlackJack2DCode.State = 2;
-                BlackJack2DCode.State1Function();
-            }
-            else if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("HitButtonHover") && BlackJack2DCode.State == 2)
-            {
-                BlackJack2DCode.State = 3;
-                BlackJack2DCode.State2Function();
-            }
-            else if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("HitButtonHover") && BlackJack2DCode.State == 3)
-            {
-                BlackJack2DCode.State = 4;
-                BlackJack2DCode.State3Function();
+                BlackJack2DCode.Hit();
             }
             //stay button up
             if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("StayButtonHover"))
             {
                 ButtonHover = "";
-                BlackJack2DCode.StayFunction();
+                BlackJack2DCode.Stay();
             }
             //_0 Button Up
             if (e.Button == MouseButtons.Left && Sprite2D.CursorIsOnGraphicElement("_0Hover") && BlackJack2DCode.Money >= 0)
@@ -244,7 +233,6 @@ namespace BlackJack2D
             if (!Sprite2D.CursorIsOnGraphicElement("ShuffleDeckButtonHover") && ButtonHover == "ShuffleDeckButton")
             {
                 ButtonHover = "";
-                Console.WriteLine(AllGraphicElements["ShuffleDeckButtonHover"].Tag);
                 AllGraphicElements["ShuffleDeckButtonHover"].DestroySelf();
                 new Sprite2D("ShuffleDeckButton");
             }
@@ -420,9 +408,9 @@ namespace BlackJack2D
             //_1000 Hover
             if (Sprite2D.CursorIsOnGraphicElement("_1000") && ButtonHover == "")
             {
-               ButtonHover = "_1000";
+                ButtonHover = "_1000";
                 AllGraphicElements[ButtonHover].DestroySelf();
-               new Sprite2D("_1000Hover");
+                new Sprite2D("_1000Hover");
             }
             if (!Sprite2D.CursorIsOnGraphicElement("_1000Hover") && ButtonHover == "_1000")
             {
@@ -482,7 +470,7 @@ namespace BlackJack2D
                 AllGraphicElements["_1000000Hover"].DestroySelf();
                 new Sprite2D("_1000000");
             }
-            
+
         }
 
         public override void WindowResize(EventArgs e)
