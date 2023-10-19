@@ -9,17 +9,12 @@ namespace BlackJack2D
         public Vector2 Scale { get; set; }
         public string Tag = "";
 
-        public GraphicElement()
-        {
-            GameEngine.RegisterGraphicElement(this);
-        }
-
         public void DestroySelf()
         {
             GameEngine.UnRegisterGraphicElement(this);
         }
 
-        public static bool CursorIsOnGraphicElement(string tag)
+        public static bool IsCursorOnGraphicElement(string tag)
         {
             foreach (GraphicElement e in GameEngine.AllGraphicElements.Values)
             {
@@ -35,6 +30,13 @@ namespace BlackJack2D
                 }
             }
             return false;
+        }
+        public bool IsCursorOnGraphicElement()
+        {
+            return Cursor.Position.X < Position.x + Scale.x &&
+                        Cursor.Position.Y < Position.y + Scale.y &&
+                        Cursor.Position.X > Position.x &&
+                        Cursor.Position.Y > Position.y;
         }
 
         // tag is other element

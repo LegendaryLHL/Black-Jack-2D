@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace BlackJack2D
 {
@@ -98,6 +99,10 @@ namespace BlackJack2D
         
         public static void RegisterGraphicElement(GraphicElement graphicElements)
         {
+            if(graphicElements is Button)
+            {
+                Console.WriteLine(graphicElements.Tag.Length);
+            }
             AllGraphicElements[graphicElements.Tag] = graphicElements;
         }
         public static void UnRegisterGraphicElement(GraphicElement graphicElements)

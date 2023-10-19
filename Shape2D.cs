@@ -10,7 +10,8 @@ namespace BlackJack2D
     // NOt finished
     public class Shape2D : GraphicElement
     {
-        public Shape2D(Vector2 Position, Vector2 Scale, string Tag)
+        public Color Color;
+        public Shape2D(Vector2 Position, Vector2 Scale, Color color, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;
@@ -22,7 +23,7 @@ namespace BlackJack2D
 
         public override void Draw(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color.Red), Position.x, Position.y, Scale.x, Scale.y);
+            g.FillRectangle(new SolidBrush(Color), Position.x, Position.y, Scale.x, Scale.y);
         }
     }
 }

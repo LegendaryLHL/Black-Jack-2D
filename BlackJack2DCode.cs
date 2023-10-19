@@ -16,8 +16,9 @@ namespace BlackJack2D
         public static int Money = 0;
         public static List<PokerCard> DealerHand;
         public static List<PokerCard> PlayerHand;
+        private static Font font = new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel);
 
-        public static PokerDeck NewPokerDeck = new PokerDeck();
+        public static PokerDeck Shoe = new PokerDeck();
         public static void PlayFunction()
         {
             ReadMoney();
@@ -47,13 +48,16 @@ namespace BlackJack2D
             PlayerHand = new List<PokerCard>();
             DealerHand = new List<PokerCard>();
 
-            new Sprite2D("HitButton");
+            //new Sprite2D("HitButton");
+            new Button(Resolution.GetResolution("HitButton"), "Hit", font, Color.LightGreen, () => {
+                Hit();
+            }, "HitButton");
             new Sprite2D("StayButton");
 
             for (int i = 0; i < 2; i++)
             {
-                NewPokerDeck.DrawCardToHand(PlayerHand);
-                NewPokerDeck.DrawCardToHand(DealerHand);
+                Shoe.DrawCardToHand(PlayerHand);
+                Shoe.DrawCardToHand(DealerHand);
             }
 
             DealerHand[0].DrawCard("DealerFirstCard");
@@ -72,7 +76,7 @@ namespace BlackJack2D
         {
             if (PlayerHand.Count < 5)
             {
-                NewPokerDeck.DrawCardToHand(PlayerHand).DrawCard("Your" + NumberToOrder(PlayerHand.Count) + "Card");
+                Shoe.DrawCardToHand(PlayerHand).DrawCard("Your" + NumberToOrder(PlayerHand.Count) + "Card");
             }
         }
 
@@ -106,7 +110,7 @@ namespace BlackJack2D
             // Dealer draw
             while (CountHandValue(DealerHand) <= 16 && DealerHand.Count < 5)
             {
-                NewPokerDeck.DrawCardToHand(DealerHand).DrawCard("Dealer" + NumberToOrder(DealerHand.Count) + "Card");
+                Shoe.DrawCardToHand(DealerHand).DrawCard("Dealer" + NumberToOrder(DealerHand.Count) + "Card");
             }
 
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
@@ -146,11 +150,11 @@ namespace BlackJack2D
             // Put back the cards
             foreach (var card in DealerHand)
             {
-                NewPokerDeck.Deck.Add(card);
+                Shoe.Deck.Add(card);
             }
             foreach (var card in PlayerHand)
             {
-                NewPokerDeck.Deck.Add(card);
+                Shoe.Deck.Add(card);
             }
         }
 

@@ -23,7 +23,7 @@ namespace BlackJack2D
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    BlackJack2DCode.NewPokerDeck.Deck[count].DrawCard(new Resolution(Resolution.GetResolution("DrawAllCards").Scale, new Vector2(j * Resolution.GetResolution("DrawAllCards").Position.x + 50, i * Resolution.GetResolution("DrawAllCards").Position.y + 50)));
+                    BlackJack2DCode.Shoe.Deck[count].DrawCard(new Resolution(Resolution.GetResolution("DrawAllCards").Scale, new Vector2(j * Resolution.GetResolution("DrawAllCards").Position.x + 50, i * Resolution.GetResolution("DrawAllCards").Position.y + 50)));
                     count++;
                 }
             }
@@ -32,14 +32,14 @@ namespace BlackJack2D
         public static void ShuffleDeckFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJack2DCode.NewPokerDeck.ShuffleDeck();
+            BlackJack2DCode.Shoe.ShuffleDeck();
             ViewDeckCardsFunction();
         }
 
         public static void RearrangeFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJack2DCode.NewPokerDeck = new PokerDeck();
+            BlackJack2DCode.Shoe = new PokerDeck();
             ViewDeckCardsFunction();
         }
 
