@@ -8,6 +8,10 @@ namespace BlackJack2D
 {
     class ViewDeckCards
     {
+        /*
+         * maybe TODO:
+         * make scene handler
+         */
         public static void ViewDeckCardsFunction()
         {
             GameEngine.AllGraphicElements.Clear();

@@ -12,7 +12,7 @@ namespace BlackJack2D
     public class Sprite : GraphicElement
     {
         public string Directory = null;
-        public Bitmap Sprite = null;
+        public Bitmap SpriteImg = null;
         public bool IsRefrence = false;
 
         public Sprite(Resolution resolution, string Directory, string Tag)
@@ -24,7 +24,7 @@ namespace BlackJack2D
 
             Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
-            Sprite = sprite;
+            SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
         }
@@ -37,7 +37,7 @@ namespace BlackJack2D
 
             Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
-            Sprite = sprite;
+            SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
         }
@@ -48,7 +48,7 @@ namespace BlackJack2D
 
             Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(temp);
-            Sprite = sprite;
+            SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
         }
@@ -58,7 +58,7 @@ namespace BlackJack2D
             Scale = resolution.Scale;
             this.Tag = Tag;
 
-            Sprite = Refrence;
+            SpriteImg = Refrence;
 
             GameEngine.RegisterGraphicElement(this);
         }
@@ -72,7 +72,7 @@ namespace BlackJack2D
 
             Image img = Image.FromFile($"../../Assets/Images/{Directory}.png");
             Bitmap sprite = new Bitmap(img, (int)Scale.x, (int)Scale.y);
-            Sprite = sprite;
+            SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
         }
@@ -81,7 +81,7 @@ namespace BlackJack2D
         {
             if (!IsRefrence)
             {
-                g.DrawImage(Sprite, Position.x, Position.y - 28, Scale.x, Scale.y);
+                g.DrawImage(SpriteImg, Position.x, Position.y - 28, Scale.x, Scale.y);
             }
         }
     }

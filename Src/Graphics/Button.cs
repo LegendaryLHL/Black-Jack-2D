@@ -31,10 +31,10 @@ namespace BlackJack2D
 
         public override void Draw(Graphics g)
         {
-            // Rectangle.
+            // Rectangle
             g.FillRectangle(new SolidBrush(Color), Position.x, Position.y, Scale.x, Scale.y);
 
-            // Text.
+            // Text
             SizeF textSize = g.MeasureString(Text, Font);
             float textX = Position.x + (Scale.x - textSize.Width) / 2;
             float textY = Position.y + (Scale.y - textSize.Height) / 2;
