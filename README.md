@@ -1,2 +1,2 @@
 # Black-Jack-2D
-Black jack 2D game from scratch. Is work in progress.
+A 2D Black Jack game from scratch.
