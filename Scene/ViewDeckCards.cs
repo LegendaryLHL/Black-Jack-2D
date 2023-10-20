@@ -12,9 +12,9 @@ namespace BlackJack2D
         {
             GameEngine.AllGraphicElements.Clear();
             DrawAllCards();
-            new Sprite2D("ShuffleDeckButton");
-            new Sprite2D("BackButton");
-            new Sprite2D("RearrangeButton");
+            new Sprite("ShuffleDeckButton");
+            new Sprite("BackButton");
+            new Sprite("RearrangeButton");
         }
         public static void DrawAllCards()
         {
@@ -23,7 +23,7 @@ namespace BlackJack2D
             {
                 for (int j = 0; j < 13; j++)
                 {
-                    BlackJack2DCode.Shoe.Deck[count].DrawCard(new Resolution(Resolution.GetResolution("DrawAllCards").Scale, new Vector2(j * Resolution.GetResolution("DrawAllCards").Position.x + 50, i * Resolution.GetResolution("DrawAllCards").Position.y + 50)));
+                    BlackJackGameLogic.Shoe.Deck[count].DrawCard(new Resolution(Resolution.GetResolution("DrawAllCards").Scale, new Vector2(j * Resolution.GetResolution("DrawAllCards").Position.x + 50, i * Resolution.GetResolution("DrawAllCards").Position.y + 50)));
                     count++;
                 }
             }
@@ -32,21 +32,21 @@ namespace BlackJack2D
         public static void ShuffleDeckFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJack2DCode.Shoe.ShuffleDeck();
+            BlackJackGameLogic.Shoe.ShuffleDeck();
             ViewDeckCardsFunction();
         }
 
         public static void RearrangeFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJack2DCode.Shoe = new PokerDeck();
+            BlackJackGameLogic.Shoe = new PokerDeck();
             ViewDeckCardsFunction();
         }
 
         public static void BackFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJack2DGame.Menu();
+            BlackJackEngine.Menu();
         }
     }
 }

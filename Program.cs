@@ -10,7 +10,7 @@ namespace BlackJack2D
     {
         static void Main(string[] args)
         {
-            BlackJack2DGame game = new BlackJack2DGame();
+            BlackJackEngine game = new BlackJackEngine();
         }
     }
 }

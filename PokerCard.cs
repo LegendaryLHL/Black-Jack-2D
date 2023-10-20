@@ -65,17 +65,17 @@ namespace BlackJack2D
 
         public void DrawCard()
         {
-            new Sprite2D(CardNameId);
+            new Sprite(CardNameId);
         }
         public void DrawCard(Resolution resolution)
         {
-            new Sprite2D(resolution, CardNameId, CardNameId);
+            new Sprite(resolution, CardNameId, CardNameId);
         }
 
         //bad
         public void DrawCard(string resolutionName)
         {
-            new Sprite2D(Resolution.GetResolution(resolutionName), CardNameId, CardNameId);
+            new Sprite(Resolution.GetResolution(resolutionName), CardNameId, CardNameId);
         }
     }
 }

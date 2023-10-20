@@ -51,10 +51,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackJack2DCode.cs" />
-    <Compile Include="BlackJack2DGame.cs" />
-    <Compile Include="Button.cs" />
-    <Compile Include="GraphicElement.cs" />
+    <Compile Include="BlackJackGameLogic.cs" />
+    <Compile Include="BlackJackEngine.cs" />
+    <Compile Include="Graphics\Button.cs" />
+    <Compile Include="Graphics\GraphicElement.cs" />
     <Compile Include="GameEngine.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,14 +63,14 @@
     <Compile Include="PokerDeck.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resolution.cs" />
-    <Compile Include="Shape2D.cs" />
-    <Compile Include="Shop.cs" />
-    <Compile Include="Sprite2D.cs" />
-    <Compile Include="Text.cs" />
+    <Compile Include="Graphics\Resolution.cs" />
+    <Compile Include="Graphics\Shape.cs" />
+    <Compile Include="Scene\Shop.cs" />
+    <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Graphics\Text.cs" />
     <Compile Include="Upgrade.cs" />
-    <Compile Include="Vector2.cs" />
-    <Compile Include="ViewDeckCards.cs" />
+    <Compile Include="Graphics\Vector2.cs" />
+    <Compile Include="Scene\ViewDeckCards.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

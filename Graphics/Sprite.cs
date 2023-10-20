@@ -9,13 +9,13 @@ using System.Security.Policy;
 
 namespace BlackJack2D
 {
-    public class Sprite2D : GraphicElement
+    public class Sprite : GraphicElement
     {
         public string Directory = null;
         public Bitmap Sprite = null;
         public bool IsRefrence = false;
 
-        public Sprite2D(Resolution resolution, string Directory, string Tag)
+        public Sprite(Resolution resolution, string Directory, string Tag)
         {
             Position = resolution.Position;
             Scale = resolution.Scale;
@@ -28,7 +28,7 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite2D(Resolution resolution, string Tag)
+        public Sprite(Resolution resolution, string Tag)
         {
             Position = resolution.Position;
             Scale = resolution.Scale;
@@ -41,7 +41,7 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite2D(string Directory, bool IsRefrence)
+        public Sprite(string Directory, bool IsRefrence)
         {
             this.IsRefrence = IsRefrence;
             this.Directory = Directory;
@@ -52,7 +52,7 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite2D(Resolution resolution, Bitmap Refrence, string Tag)
+        public Sprite(Resolution resolution, Bitmap Refrence, string Tag)
         {
             Position = resolution.Position;
             Scale = resolution.Scale;
@@ -62,7 +62,7 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite2D(string Tag)
+        public Sprite(string Tag)
         {
             Resolution resolutionInstance = Resolution.GetResolution(Tag);
             Position = resolutionInstance.Position;

@@ -9,37 +9,17 @@ namespace BlackJack2D
     class PokerDeck
     {
         public List<PokerCard> Deck = new List<PokerCard>();
-        public PokerDeck()
+        public PokerDeck(int numberOfDeck = 1)
         {
-
-            for (int i = 1; i < 5; i++)
+            for (int i = 0; i < numberOfDeck; i++)
             {
-                switch (i)
+                string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+                foreach (string suit in suits)
                 {
-                    case 1:
-                        for (int a = 1; a < 14; a++)
-                        {
-                            Deck.Add(new PokerCard(a, "Hearts"));
-                        }
-                        break;
-                    case 2:
-                        for (int b = 1; b < 14; b++)
-                        {
-                            Deck.Add(new PokerCard(b, "Diamonds"));
-                        }
-                        break;
-                    case 3:
-                        for (int c = 1; c < 14; c++)
-                        {
-                            Deck.Add(new PokerCard(c, "Clubs"));
-                        }
-                        break;
-                    case 4:
-                        for (int d = 1; d < 14; d++)
-                        {
-                            Deck.Add(new PokerCard(d, "Spades"));
-                        }
-                        break;
+                    for (int value = 1; value <= 13; value++)
+                    {
+                        Deck.Add(new PokerCard(value, suit));
+                    }
                 }
             }
         }

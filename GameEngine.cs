@@ -99,10 +99,6 @@ namespace BlackJack2D
         
         public static void RegisterGraphicElement(GraphicElement graphicElements)
         {
-            if(graphicElements is Button)
-            {
-                Console.WriteLine(graphicElements.Tag.Length);
-            }
             AllGraphicElements[graphicElements.Tag] = graphicElements;
         }
         public static void UnRegisterGraphicElement(GraphicElement graphicElements)

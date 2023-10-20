@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace BlackJack2D
 {
     // NOt finished
-    public class Shape2D : GraphicElement
+    public class Shape : GraphicElement
     {
         public Color Color;
-        public Shape2D(Vector2 Position, Vector2 Scale, Color color, string Tag)
+        public Shape(Vector2 Position, Vector2 Scale, Color color, string Tag)
         {
             this.Position = Position;
             this.Scale = Scale;

@@ -10,13 +10,12 @@ using System.Media;
 
 namespace BlackJack2D
 {
-    class BlackJack2DCode
+    class BlackJackGameLogic
     {
         public static int BetAmount = 0;
         public static int Money = 0;
         public static List<PokerCard> DealerHand;
         public static List<PokerCard> PlayerHand;
-        private static Font font = new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel);
 
         public static PokerDeck Shoe = new PokerDeck();
         public static void PlayFunction()
@@ -30,17 +29,17 @@ namespace BlackJack2D
             GameEngine.AllGraphicElements.Clear();
             new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
             new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
-            new Sprite2D("_0");
-            new Sprite2D("_50");
-            new Sprite2D("_100");
-            new Sprite2D("_200");
-            new Sprite2D("_500");
-            new Sprite2D("_1000");
-            new Sprite2D("_5000");
-            new Sprite2D("_10000");
-            new Sprite2D("_100000");
-            new Sprite2D("_1000000");
-            new Sprite2D("BackButton");
+            new Sprite("_0");
+            new Sprite("_50");
+            new Sprite("_100");
+            new Sprite("_200");
+            new Sprite("_500");
+            new Sprite("_1000");
+            new Sprite("_5000");
+            new Sprite("_10000");
+            new Sprite("_100000");
+            new Sprite("_1000000");
+            new Sprite("BackButton");
         }
         public static void BlackJack()
         {
@@ -49,10 +48,8 @@ namespace BlackJack2D
             DealerHand = new List<PokerCard>();
 
             //new Sprite2D("HitButton");
-            new Button(Resolution.GetResolution("HitButton"), "Hit", font, Color.LightGreen, () => {
-                Hit();
-            }, "HitButton");
-            new Sprite2D("StayButton");
+            new Button(Resolution.GetResolution("HitButton"), "Hit", new Font("Arial", 80, FontStyle.Regular, GraphicsUnit.Pixel), Color.LightGreen, Hit, "HitButton");
+            new Sprite("StayButton");
 
             for (int i = 0; i < 2; i++)
             {
@@ -61,7 +58,7 @@ namespace BlackJack2D
             }
 
             DealerHand[0].DrawCard("DealerFirstCard");
-            new Sprite2D(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
+            new Sprite(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
 
             PlayerHand[0].DrawCard("YourFirstCard");
             PlayerHand[1].DrawCard("YourSecondCard");
@@ -115,7 +112,7 @@ namespace BlackJack2D
 
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
             GameEngine.AllGraphicElements["StayButtonHover"].DestroySelf();
-            new Sprite2D("BackButton");
+            new Sprite("BackButton");
             if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
             {
                 //win

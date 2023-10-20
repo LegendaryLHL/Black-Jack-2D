@@ -11,8 +11,8 @@ namespace BlackJack2D
         public static void ShopFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            new Sprite2D("UpgradeButton");
-            new Sprite2D("BackButton");
+            new Sprite("UpgradeButton");
+            new Sprite("BackButton");
         }
     }
 }
