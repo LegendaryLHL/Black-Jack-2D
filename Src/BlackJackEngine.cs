@@ -6,7 +6,6 @@ namespace BlackJack2D
 {
     class BlackJackEngine : GameEngine
     {
-        string ButtonHover = "";
         public BlackJackEngine() : base(new Vector2(625, 512), ("Black Jack 2D")) { }
 
         public override void OnInitialise()
@@ -17,7 +16,7 @@ namespace BlackJack2D
         {
             Resolution.MakeResolution();
             BackgroundColour = Color.Green;
-            Menu();
+            BlackJackGameLogic.Menu();
         }
         public override void OnDraw()
         {
@@ -62,7 +61,7 @@ namespace BlackJack2D
                         break;
                     }
                 }
-            }
+            }/*
             //View Card Button Up
             if (e.Button == MouseButtons.Left && Sprite.IsCursorOnGraphicElement("ViewDeckCardsButtonHover"))
             {
@@ -112,10 +111,10 @@ namespace BlackJack2D
                 //upgrade function;
             }
             //Hit Button Up
-            /*if (e.Button == MouseButtons.Left && Sprite2D.IsCursorOnGraphicElement("HitButtonHover"))
+            *//*if (e.Button == MouseButtons.Left && Sprite2D.IsCursorOnGraphicElement("HitButtonHover"))
             {
                 BlackJack2DCode.Hit();
-            }*/
+            }*//*
             //stay button up
             if (e.Button == MouseButtons.Left && Sprite.IsCursorOnGraphicElement("StayButtonHover"))
             {
@@ -194,7 +193,7 @@ namespace BlackJack2D
             }
 
             //Same code bcause need to hover
-            CheakHover();//because after click becomes not hover so click cheak again lol
+            CheakHover();//because after click becomes not hover so click cheak again lol*/
         }
 
         public override void GetMouseHover(EventArgs e)
@@ -207,14 +206,7 @@ namespace BlackJack2D
             CheakHover();
         }
 
-        public static void Menu()
-        {
-            AllGraphicElements.Clear();
-            new Sprite("ViewDeckCardsButton");
-            new Sprite("PlayButton");
-            new Sprite("QuitButton");
-            new Sprite("ShopButton");
-        }
+        
 
         public void CheakHover()
         {
@@ -237,7 +229,7 @@ namespace BlackJack2D
                     }
                 }
             }
-            //View Deck Card button Hover
+            /*//View Deck Card button Hover
             if (Sprite.IsCursorOnGraphicElement("ViewDeckCardsButton") && ButtonHover == "")
             {
                 ButtonHover = "ViewDeckCardsButton";
@@ -342,7 +334,7 @@ namespace BlackJack2D
                 new Sprite("UpgradeButton");
             }
             //Hit Button Hover
-            /*if (Sprite2D.IsCursorOnGraphicElement("HitButton") && ButtonHover == "")
+            *//*if (Sprite2D.IsCursorOnGraphicElement("HitButton") && ButtonHover == "")
             {
                 ButtonHover = "HitButton";
                 AllGraphicElements[ButtonHover].DestroySelf();
@@ -353,7 +345,7 @@ namespace BlackJack2D
                 ButtonHover = "";
                 AllGraphicElements["HitButtonHover"].DestroySelf();
                 new Sprite2D("HitButton");
-            }*/
+            }*//*
             //Stay Button Hover
             if (Sprite.IsCursorOnGraphicElement("StayButton") && ButtonHover == "")
             {
@@ -497,7 +489,7 @@ namespace BlackJack2D
                 AllGraphicElements["_1000000Hover"].DestroySelf();
                 new Sprite("_1000000");
             }
-
+*/
         }
 
         public override void WindowResize(EventArgs e)

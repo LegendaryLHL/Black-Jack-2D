@@ -64,9 +64,9 @@ namespace BlackJack2D
         }
         public Sprite(string Tag)
         {
-            Resolution resolutionInstance = Resolution.GetResolution(Tag);
-            Position = resolutionInstance.Position;
-            Scale = resolutionInstance.Scale;
+            Resolution resolution = Resolution.GetResolution(Tag);
+            Position = resolution.Position;
+            Scale = resolution.Scale;
             Directory = Tag;
             this.Tag = Tag;
 

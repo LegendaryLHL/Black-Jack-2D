@@ -14,6 +14,7 @@ namespace BlackJack2D
         public Font Font;
         public Action RunAction;
         public bool IsHover = false;
+        public bool IsHeld = false;
         public Color Color;
 
         public Button(Resolution resolution, string text, Font font, Color color, Action runAction, string tag = "not set")
@@ -28,7 +29,19 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
+        public Button(string tag, string text, Font font, Color color, Action runAction)
+        {
+            Resolution resolution = Resolution.GetResolution(tag);
+            Position = resolution.Position;
+            Scale = resolution.Scale;
+            Text = text;
+            Tag = tag;
+            Font = font;
+            Color = color;
+            RunAction = runAction;
 
+            GameEngine.RegisterGraphicElement(this);
+        }
         public override void Draw(Graphics g)
         {
             // Rectangle

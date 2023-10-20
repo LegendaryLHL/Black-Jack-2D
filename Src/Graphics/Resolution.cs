@@ -34,13 +34,13 @@ namespace BlackJack2D
         public static void MakeResolution()
         {
             // Made for 2048, 1152
-            new Resolution(new Vector2(200, 100), new Vector2(850, 520), "ViewDeckCardsButton");
+            new Resolution(new Vector2(200, 100), new Vector2(850, 450), "ViewDeckCardsButton");
             new Resolution(new Vector2(200, 100), new Vector2(350, 900), "ShuffleDeckButton");
             new Resolution( new Vector2(200, 100), new Vector2(1300, 900), "BackButton");
             new Resolution(new Vector2(200, 100), new Vector2(845, 900), "RearrangeButton");
             new Resolution(new Vector2(88, 124), new Vector2(140, 200), "DrawAllCards");
-            new Resolution(new Vector2(200, 100), new Vector2(400, 520), "PlayButton");
-            new Resolution(new Vector2(200, 100), new Vector2(1300, 520), "QuitButton");
+            new Resolution(new Vector2(200, 100), new Vector2(400, 450), "PlayButton");
+            new Resolution(new Vector2(200, 100), new Vector2(1300, 450), "QuitButton");
             new Resolution(new Vector2(176, 248), new Vector2(200, 100), "DealerFirstCard");
             new Resolution(new Vector2(176, 248), new Vector2(500, 100), "DealerSecondCard");
             new Resolution(new Vector2(176, 248), new Vector2(800, 100), "DealerThirdCard");
@@ -55,18 +55,18 @@ namespace BlackJack2D
             new Resolution(new Vector2(200, 100), new Vector2(1250, 900), "StayButton");
             new Resolution(new Vector2(0,0), new Vector2(200, 100), "PlaceBet");
             new Resolution(new Vector2(0,0), new Vector2(100, 1000), "YourMoney");
-            new Resolution(new Vector2(200, 100), new Vector2(100, 520), "_0");
-            new Resolution(new Vector2(200, 100), new Vector2(400, 520), "_50");
-            new Resolution(new Vector2(200, 100), new Vector2(700, 520), "_100");
-            new Resolution(new Vector2(200, 100), new Vector2(1000, 520), "_200");
-            new Resolution(new Vector2(200, 100), new Vector2(1300, 520), "_500");
-            new Resolution(new Vector2(200, 100), new Vector2(1600, 520), "_1000");
-            new Resolution(new Vector2(200, 100), new Vector2(100, 700), "_5000");
-            new Resolution(new Vector2(200, 100), new Vector2(400, 700), "_10000");
-            new Resolution(new Vector2(200, 100), new Vector2(700, 700), "_100000");
-            new Resolution(new Vector2(200, 100), new Vector2(1000, 700), "_1000000");
+            new Resolution(new Vector2(200, 100), new Vector2(100, 450), "0");
+            new Resolution(new Vector2(200, 100), new Vector2(400, 450), "50");
+            new Resolution(new Vector2(200, 100), new Vector2(700, 450), "100");
+            new Resolution(new Vector2(200, 100), new Vector2(1000, 450), "200");
+            new Resolution(new Vector2(200, 100), new Vector2(1300, 450), "500");
+            new Resolution(new Vector2(200, 100), new Vector2(1600, 450), "1000");
+            new Resolution(new Vector2(200, 100), new Vector2(100, 640), "5000");
+            new Resolution(new Vector2(200, 100), new Vector2(400, 640), "10000");
+            new Resolution(new Vector2(200, 100), new Vector2(700, 640), "100000");
+            new Resolution(new Vector2(200, 100), new Vector2(1000, 640), "1000000");
             new Resolution(new Vector2(200, 100), new Vector2(630, 750), "ShopButton");
-            new Resolution(new Vector2(200, 100), new Vector2(400, 520), "UpgradeButton");
+            new Resolution(new Vector2(200, 100), new Vector2(400, 450), "UpgradeButton");
         }
 
         private static Resolution ScaleResolution(Resolution resolution)
@@ -100,7 +100,6 @@ namespace BlackJack2D
             {
                 if (resolution.Id == "DrawAllCards")
                 {
-                    Console.WriteLine("retruning");
                     return resolution;
                 }
             }

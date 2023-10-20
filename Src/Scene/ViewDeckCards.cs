@@ -50,7 +50,7 @@ namespace BlackJack2D
         public static void BackFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            BlackJackEngine.Menu();
+            BlackJackGameLogic.Menu();
         }
     }
 }

@@ -18,7 +18,15 @@ namespace BlackJack2D
         public static List<PokerCard> PlayerHand;
 
         public static PokerDeck Shoe = new PokerDeck();
-        public static void PlayFunction()
+        public static void Menu()
+        {
+            GameEngine.AllGraphicElements.Clear();
+            new Sprite("ViewDeckCardsButton");
+            new Button("PlayButton", "Play", Font(80), Color.LightGreen, Play);
+            new Sprite("QuitButton");
+            new Sprite("ShopButton");
+        }
+        public static void Play()
         {
             ReadMoney();
             if (Money < 50)
@@ -29,16 +37,15 @@ namespace BlackJack2D
             GameEngine.AllGraphicElements.Clear();
             new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
             new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
-            new Sprite("_0");
-            new Sprite("_50");
-            new Sprite("_100");
-            new Sprite("_200");
-            new Sprite("_500");
-            new Sprite("_1000");
-            new Sprite("_5000");
-            new Sprite("_10000");
-            new Sprite("_100000");
-            new Sprite("_1000000");
+            int[] values = {0, 50, 100, 200, 500, 1000, 5000, 10000, 100000, 1000000};
+            foreach (var value in values)
+            {
+                new Button(value.ToString(), value.ToString(), Font(50), Color.LightGreen, () =>
+                {
+                    BetAmount = value;
+                    BlackJack();
+                });
+            }
             new Sprite("BackButton");
         }
         public static void BlackJack()
@@ -49,7 +56,7 @@ namespace BlackJack2D
 
             //new Sprite2D("HitButton");
             new Button(Resolution.GetResolution("HitButton"), "Hit", new Font("Arial", 80, FontStyle.Regular, GraphicsUnit.Pixel), Color.LightGreen, Hit, "HitButton");
-            new Sprite("StayButton");
+            new Button(Resolution.GetResolution("StayButton"), "Stay", new Font("Arial", 80, FontStyle.Regular, GraphicsUnit.Pixel), Color.LightGreen, Stay, "HitButton");
 
             for (int i = 0; i < 2; i++)
             {
@@ -174,6 +181,11 @@ namespace BlackJack2D
                     Money = Int32.Parse(SW.ReadLine());
                 }
             }
+        }
+
+        public static Font Font(int fontSize)
+        {
+            return new Font("Arial", fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
         }
     }
 }
