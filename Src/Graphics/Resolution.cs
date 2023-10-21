@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -53,8 +54,8 @@ namespace BlackJack2D
             new Resolution(new Vector2(176, 248), new Vector2(1400, 400), "YourFifthCard");
             new Resolution(new Vector2(200, 100), new Vector2(350, 900), "HitButton");
             new Resolution(new Vector2(200, 100), new Vector2(1250, 900), "StayButton");
-            new Resolution(new Vector2(0,0), new Vector2(200, 100), "PlaceBet");
-            new Resolution(new Vector2(0,0), new Vector2(100, 1000), "YourMoney");
+            new Resolution(new Vector2(0,0), new Vector2(100, 100), "PlaceBet");
+            new Resolution(new Vector2(0,0), new Vector2(100, 900), "YourMoney");
             new Resolution(new Vector2(200, 100), new Vector2(100, 450), "0");
             new Resolution(new Vector2(200, 100), new Vector2(400, 450), "50");
             new Resolution(new Vector2(200, 100), new Vector2(700, 450), "100");
@@ -75,7 +76,20 @@ namespace BlackJack2D
             resolution.Position = new Vector2(resolution.Position.x * ScreenResolution.x / OriginalResolution.x, resolution.Position.y * ScreenResolution.y / OriginalResolution.y);
             return resolution;
         }
+        public static Font ScaledFont(int fontSize)
+        {
+            float scaleX = (float)ScreenResolution.x / OriginalResolution.x;
+            float scaleY = (float)ScreenResolution.y / OriginalResolution.y;
 
+            int scaledFontSize = (int)(fontSize * Math.Min(scaleX, scaleY));
+
+            if (scaledFontSize < 1)
+            {
+                scaledFontSize = 1;
+            }
+
+            return new Font("Arial", scaledFontSize, FontStyle.Regular, GraphicsUnit.Pixel);
+        }
         public static Resolution GetResolution(string id)
         {
             foreach (Resolution resolution in Resolutions.Values)

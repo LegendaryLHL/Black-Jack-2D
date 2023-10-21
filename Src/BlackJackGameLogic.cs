@@ -16,15 +16,16 @@ namespace BlackJack2D
         public static int Money = 0;
         public static List<PokerCard> DealerHand;
         public static List<PokerCard> PlayerHand;
+        private static string[] Numbers = { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
 
         public static PokerDeck Shoe = new PokerDeck();
         public static void Menu()
         {
             GameEngine.AllGraphicElements.Clear();
-            new Sprite("ViewDeckCardsButton");
-            new Button("PlayButton", "Play", Font(80), Color.LightGreen, Play);
-            new Sprite("QuitButton");
-            new Sprite("ShopButton");
+            new Button("ViewDeckCardsButton", "View Deck", Resolution.ScaledFont(40), Color.LightGreen, ViewDeckCards.ViewDeckCardsFunction);
+            new Button("PlayButton", "Play", Resolution.ScaledFont(80), Color.LightGreen, Play);
+            new Button("QuitButton", "Quit", Resolution.ScaledFont(80), Color.LightGreen, Application.Exit);
+            new Button("ShopButton", "Shop", Resolution.ScaledFont(80), Color.LightGreen, Shop.ShopFunction);
         }
         public static void Play()
         {
@@ -35,18 +36,18 @@ namespace BlackJack2D
             }
             //put bet
             GameEngine.AllGraphicElements.Clear();
-            new Text("Place your bet:", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("PlaceBet").Position);
-            new Text($"Your Money: {Money}$", new Font("Arial", 50, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("YourMoney").Position);
+            new Text("Place your bet:", Resolution.ScaledFont(100), Resolution.GetResolution("PlaceBet").Position, "placeBet");
+            new Text($"Your Money: {Money}$", Resolution.ScaledFont(100), Resolution.GetResolution("YourMoney").Position, "yourMoney");
             int[] values = {0, 50, 100, 200, 500, 1000, 5000, 10000, 100000, 1000000};
             foreach (var value in values)
             {
-                new Button(value.ToString(), value.ToString(), Font(50), Color.LightGreen, () =>
+                new Button(value.ToString(), value.ToString(), Resolution.ScaledFont(50), Color.LightGreen, () =>
                 {
                     BetAmount = value;
                     BlackJack();
                 });
             }
-            new Sprite("BackButton");
+            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
         }
         public static void BlackJack()
         {
@@ -54,9 +55,8 @@ namespace BlackJack2D
             PlayerHand = new List<PokerCard>();
             DealerHand = new List<PokerCard>();
 
-            //new Sprite2D("HitButton");
-            new Button(Resolution.GetResolution("HitButton"), "Hit", new Font("Arial", 80, FontStyle.Regular, GraphicsUnit.Pixel), Color.LightGreen, Hit, "HitButton");
-            new Button(Resolution.GetResolution("StayButton"), "Stay", new Font("Arial", 80, FontStyle.Regular, GraphicsUnit.Pixel), Color.LightGreen, Stay, "HitButton");
+            new Button("HitButton", "Hit", Resolution.ScaledFont(80), Color.LightGreen, Hit);
+            new Button("StayButton", "Stay", Resolution.ScaledFont(80), Color.LightGreen, Stay);
 
             for (int i = 0; i < 2; i++)
             {
@@ -71,16 +71,11 @@ namespace BlackJack2D
             PlayerHand[1].DrawCard("YourSecondCard");
         }
 
-        public static string NumberToOrder(int number)
-        {
-            var map = new[] { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
-            return map[number];
-        }
         public static void Hit()
         {
             if (PlayerHand.Count < 5)
             {
-                Shoe.DrawCardToHand(PlayerHand).DrawCard("Your" + NumberToOrder(PlayerHand.Count) + "Card");
+                Shoe.DrawCardToHand(PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Count] + "Card");
             }
         }
 
@@ -114,39 +109,40 @@ namespace BlackJack2D
             // Dealer draw
             while (CountHandValue(DealerHand) <= 16 && DealerHand.Count < 5)
             {
-                Shoe.DrawCardToHand(DealerHand).DrawCard("Dealer" + NumberToOrder(DealerHand.Count) + "Card");
+                Shoe.DrawCardToHand(DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Count] + "Card");
             }
 
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
-            GameEngine.AllGraphicElements["StayButtonHover"].DestroySelf();
-            new Sprite("BackButton");
+            GameEngine.AllGraphicElements["StayButton"].DestroySelf();
+
+            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
             if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
             {
                 //win
-                new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                new Text("You Won!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
             else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(DealerHand) > 21)
             {
                 //win
-                new Text("You Won!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                new Text("You Won!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount;
             }
             else if (CountHandValue(PlayerHand) <= 21 && PlayerHand.Count == 5)
             {
                 // Five Card
-                new Text("5-card Charlie!!!!", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                new Text("5-card Charlie!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
                 Money += BetAmount * 3;
             }
             else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(PlayerHand) == CountHandValue(DealerHand))
             {
                 //tie
-                new Text("Tie", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                new Text("Tie", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
             }
             else
             {
                 //lose
-                new Text("You Lost :(", new Font("Arial", 100, FontStyle.Regular, GraphicsUnit.Pixel), Resolution.GetResolution("HitButton").Position);
+                new Text("You Lost :(", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
                 Money -= BetAmount;
             }
             WriteMoney();
@@ -181,11 +177,6 @@ namespace BlackJack2D
                     Money = Int32.Parse(SW.ReadLine());
                 }
             }
-        }
-
-        public static Font Font(int fontSize)
-        {
-            return new Font("Arial", fontSize, FontStyle.Regular, GraphicsUnit.Pixel);
         }
     }
 }

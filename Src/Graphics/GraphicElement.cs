@@ -34,9 +34,9 @@ namespace BlackJack2D
         public bool IsCursorOnGraphicElement()
         {
             return Cursor.Position.X < Position.x + Scale.x &&
-                        Cursor.Position.Y < Position.y + Scale.y &&
+                        Cursor.Position.Y - 28 < Position.y + Scale.y &&
                         Cursor.Position.X > Position.x &&
-                        Cursor.Position.Y > Position.y;
+                        Cursor.Position.Y - 28 > Position.y;
         }
 
         // tag is other element

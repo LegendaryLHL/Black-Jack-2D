@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,9 @@ namespace BlackJack2D
         {
             GameEngine.AllGraphicElements.Clear();
             DrawAllCards();
-            new Sprite("ShuffleDeckButton");
-            new Sprite("BackButton");
-            new Sprite("RearrangeButton");
+            new Button("ShuffleDeckButton", "Shuffle Deck", Resolution.ScaledFont(30), Color.LightGreen, ShuffleDeckFunction);
+            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, BlackJackGameLogic.Menu);
+            new Button("RearrangeButton", "Rearrange", Resolution.ScaledFont(40), Color.LightGreen, RearrangeFunction);
         }
         public static void DrawAllCards()
         {
@@ -45,12 +46,6 @@ namespace BlackJack2D
             GameEngine.AllGraphicElements.Clear();
             BlackJackGameLogic.Shoe = new PokerDeck();
             ViewDeckCardsFunction();
-        }
-
-        public static void BackFunction()
-        {
-            GameEngine.AllGraphicElements.Clear();
-            BlackJackGameLogic.Menu();
         }
     }
 }

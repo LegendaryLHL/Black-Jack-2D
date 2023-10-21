@@ -81,7 +81,7 @@ namespace BlackJack2D
         {
             if (!IsRefrence)
             {
-                g.DrawImage(SpriteImg, Position.x, Position.y - 28, Scale.x, Scale.y);
+                g.DrawImage(SpriteImg, Position.x, Position.y, Scale.x, Scale.y);
             }
         }
     }

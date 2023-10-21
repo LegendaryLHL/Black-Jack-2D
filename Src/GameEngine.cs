@@ -43,7 +43,6 @@ namespace BlackJack2D
             Window.KeyPress += Window_KeyPress;
             Window.MouseDown += Window_MouseDown;
             Window.MouseUp += Window_MouseUp;
-            Window.MouseHover += Window_MouseHover;
             Window.MouseMove += Window_MouseMove;
             Window.FormClosing += Window_FormClosing;
             Window.Resize += Window_Resize;
@@ -57,11 +56,6 @@ namespace BlackJack2D
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
             GetMouseMove(e);
-        }
-
-        private void Window_MouseHover(object sender, EventArgs e)
-        {
-            GetMouseHover(e);
         }
 
         private void Window_MouseUp(object sender, MouseEventArgs e)
@@ -150,7 +144,6 @@ namespace BlackJack2D
         public abstract void GetKeyPress(KeyPressEventArgs e);
         public abstract void GetMouseDown(MouseEventArgs e);
         public abstract void GetMouseUp(MouseEventArgs e);
-        public abstract void GetMouseHover(EventArgs e);
         public abstract void GetMouseMove(EventArgs e);
         public abstract void WindowResize(EventArgs e);
 
