@@ -120,5 +120,20 @@ namespace BlackJack2D
 
             return null;
         }
+
+        public static int Scaled(int number)
+        {
+            float scaleX = (float)ScreenResolution.x / OriginalResolution.x;
+            float scaleY = (float)ScreenResolution.y / OriginalResolution.y;
+
+            int scaledNumber = (int)(number * Math.Min(scaleX, scaleY));
+
+            if (scaledNumber < 1)
+            {
+                scaledNumber = 1;
+            }
+
+            return scaledNumber;
+        }
     }
 }

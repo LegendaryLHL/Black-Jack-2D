@@ -71,11 +71,56 @@ namespace BlackJack2D
         {
             new Sprite(resolution, CardNameId, CardNameId);
         }
+        public void DrawCard(Resolution resolution,string tag)
+        {
+            new Sprite(resolution, CardNameId, tag);
+        }
 
         //bad
         public void DrawCard(string resolutionName)
         {
             new Sprite(Resolution.GetResolution(resolutionName), CardNameId, CardNameId);
+        }
+
+        public static List<PokerCard> NewShoe(int numberOfDeck = 1)
+        {
+            List<PokerCard> shoe = new List<PokerCard>();
+            for (int i = 0; i < numberOfDeck; i++)
+            {
+                string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+                foreach (string suit in suits)
+                {
+                    for (int value = 1; value <= 13; value++)
+                    {
+                        shoe.Add(new PokerCard(value, suit));
+                    }
+                }
+            }
+            return shoe;
+        }
+        public static void ShuffleShoe(List<PokerCard> shoe)
+        {
+            Random rng = new Random();
+            int cardNumber = shoe.Count;
+
+            for (int i = 0; i < cardNumber; i++)
+            {
+                int randomIndex = rng.Next(i, cardNumber);
+                PokerCard temp = shoe[i];
+                shoe[i] = shoe[randomIndex];
+                shoe[randomIndex] = temp;
+            }
+        }
+        public static PokerCard DrawTopCard(List<PokerCard> cards, List<PokerCard> hand)
+        {
+            PokerCard card = cards[0];
+            cards.Remove(card);
+            hand.Add(card);
+            return card;
+        }
+        public static int CountNumberOfDeck(List<PokerCard> shoe)
+        {
+            return shoe.Count / 52;
         }
     }
 }

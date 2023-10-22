@@ -61,29 +61,7 @@ namespace BlackJack2D
                         break;
                     }
                 }
-            }/*
-            
-            //Shuffle Cards Button Up
-            if (e.Button == MouseButtons.Left && Sprite.IsCursorOnGraphicElement("ShuffleDeckButtonHover"))
-            {
-                ButtonHover = "";
-                ViewDeckCards.ShuffleDeckFunction();
             }
-            //Rearrange Button Up
-            if (e.Button == MouseButtons.Left && Sprite.IsCursorOnGraphicElement("RearrangeButtonHover"))
-            {
-                ButtonHover = "";
-                ViewDeckCards.RearrangeFunction();
-            }
-            //Upgrade Button Up
-            if (e.Button == MouseButtons.Left && Sprite.IsCursorOnGraphicElement("UpgradeButtonHover"))
-            {
-                ButtonHover = "";
-                //upgrade function;
-            }
-
-            //Same code bcause need to hover
-            CheakHover();//because after click becomes not hover so click cheak again lol*/
         }
 
         public override void GetMouseMove(EventArgs e)

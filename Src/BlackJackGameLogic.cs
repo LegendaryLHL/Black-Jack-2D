@@ -18,7 +18,7 @@ namespace BlackJack2D
         public static List<PokerCard> PlayerHand;
         private static string[] Numbers = { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
 
-        public static PokerDeck Shoe = new PokerDeck();
+        public static List<PokerCard> Shoe = PokerCard.NewShoe();
         public static void Menu()
         {
             GameEngine.AllGraphicElements.Clear();
@@ -60,8 +60,8 @@ namespace BlackJack2D
 
             for (int i = 0; i < 2; i++)
             {
-                Shoe.DrawCardToHand(PlayerHand);
-                Shoe.DrawCardToHand(DealerHand);
+                PokerCard.DrawTopCard(Shoe, PlayerHand);
+                PokerCard.DrawTopCard(Shoe, DealerHand);
             }
 
             DealerHand[0].DrawCard("DealerFirstCard");
@@ -69,13 +69,21 @@ namespace BlackJack2D
 
             PlayerHand[0].DrawCard("YourFirstCard");
             PlayerHand[1].DrawCard("YourSecondCard");
+
+            if (CountHandValue(PlayerHand) == 21){
+                Won("BlackJack!!!", (int)Math.Round(BetAmount * 1.5));
+            } 
         }
 
         public static void Hit()
         {
             if (PlayerHand.Count < 5)
             {
-                Shoe.DrawCardToHand(PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Count] + "Card");
+                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Count] + "Card");
+                if(CountHandValue(PlayerHand) > 21)
+                {
+                    Won("Bust :(", -BetAmount);
+                }
             }
         }
 
@@ -109,52 +117,51 @@ namespace BlackJack2D
             // Dealer draw
             while (CountHandValue(DealerHand) <= 16 && DealerHand.Count < 5)
             {
-                Shoe.DrawCardToHand(DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Count] + "Card");
+                PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Count] + "Card");
             }
 
+            if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
+            {
+                Won("You Won!!!!", BetAmount);
+            }
+            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(DealerHand) > 21)
+            {
+                Won("You Won!!!!", BetAmount);
+            }
+            else if (CountHandValue(PlayerHand) <= 21 && PlayerHand.Count == 5)
+            {
+                Won("5-card Charlie!!!!", BetAmount * 3);
+            }
+            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(PlayerHand) == CountHandValue(DealerHand))
+            {
+                Won("Tie", 0);
+            }
+            else
+            {
+                Won("You Lose :(", -BetAmount);
+            }
+        }
+
+        private static void Won(string msg, int winAmount)
+        {
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
             GameEngine.AllGraphicElements["StayButton"].DestroySelf();
 
             new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
-            if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
-            {
-                //win
-                new Text("You Won!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
-                Money += BetAmount;
-            }
-            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(DealerHand) > 21)
-            {
-                //win
-                new Text("You Won!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
-                Money += BetAmount;
-            }
-            else if (CountHandValue(PlayerHand) <= 21 && PlayerHand.Count == 5)
-            {
-                // Five Card
-                new Text("5-card Charlie!!!!", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
-                Money += BetAmount * 3;
-            }
-            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(PlayerHand) == CountHandValue(DealerHand))
-            {
-                //tie
-                new Text("Tie", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
-            }
-            else
-            {
-                //lose
-                new Text("You Lost :(", Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
-                Money -= BetAmount;
-            }
+
+            new Text(msg, Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
+            Money += winAmount;
+
             WriteMoney();
 
             // Put back the cards
             foreach (var card in DealerHand)
             {
-                Shoe.Deck.Add(card);
+                Shoe.Add(card);
             }
             foreach (var card in PlayerHand)
             {
-                Shoe.Deck.Add(card);
+                Shoe.Add(card);
             }
         }
 

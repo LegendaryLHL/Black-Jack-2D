@@ -90,9 +90,12 @@ namespace BlackJack2D
         {
             WindowResize(e);
         }
-        
+
         public static void RegisterGraphicElement(GraphicElement graphicElements)
         {
+            if (AllGraphicElements.ContainsKey(graphicElements.Tag)){
+                Log.Warning("KeyAlreadyExist: " + graphicElements.Tag + ". It Will not be added to AllGraphicElements");
+            }
             AllGraphicElements[graphicElements.Tag] = graphicElements;
         }
         public static void UnRegisterGraphicElement(GraphicElement graphicElements)
