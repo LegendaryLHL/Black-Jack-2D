@@ -12,17 +12,17 @@ namespace BlackJack2D
 {
     class BlackJackGameLogic
     {
+        private static bool FirstTime = true;
         public static int BetAmount = 0;
         public static int Money = 0;
-        public static List<PokerCard> DealerHand;
-        public static List<PokerCard> PlayerHand;
         private static string[] Numbers = { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
-
-        public static List<PokerCard> Shoe = PokerCard.NewShoe();
+        private static PokerHand DealerHand = new PokerHand(Resolution.GetResolution("DealerSecondCard"), "DealerHand");
+        private static PokerHand PlayerHand = new PokerHand(Resolution.GetResolution("YourSecondCard"), "PlayerHand");
+        private static PokerHand DiscardPile = new PokerHand(Resolution.GetResolution("YourFirstCard"), "DiscardPile");
+        private static PokerHand Shoe = new PokerHand(Resolution.GetResolution("YourFiftCard"), "Shoe");
         public static void Menu()
         {
             GameEngine.AllGraphicElements.Clear();
-            new Button("ViewDeckCardsButton", "View Deck", Resolution.ScaledFont(40), Color.LightGreen, ViewDeckCards.ViewDeckCardsFunction);
             new Button("PlayButton", "Play", Resolution.ScaledFont(80), Color.LightGreen, Play);
             new Button("QuitButton", "Quit", Resolution.ScaledFont(80), Color.LightGreen, Application.Exit);
             new Button("ShopButton", "Shop", Resolution.ScaledFont(80), Color.LightGreen, Shop.ShopFunction);
@@ -43,8 +43,11 @@ namespace BlackJack2D
             {
                 new Button(value.ToString(), value.ToString(), Resolution.ScaledFont(50), Color.LightGreen, () =>
                 {
-                    BetAmount = value;
-                    BlackJack();
+                    if (Money >= value)
+                    {
+                        BetAmount = value;
+                        BlackJack();
+                    }
                 });
             }
             new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
@@ -52,87 +55,76 @@ namespace BlackJack2D
         public static void BlackJack()
         {
             GameEngine.AllGraphicElements.Clear();
-            PlayerHand = new List<PokerCard>();
-            DealerHand = new List<PokerCard>();
+            if (FirstTime)
+            {
+                Shoe.Cards = PokerCard.NewShoe();
+                PokerCard.ShuffleHand(Shoe);
+                FirstTime = false;
+            }
 
             new Button("HitButton", "Hit", Resolution.ScaledFont(80), Color.LightGreen, Hit);
             new Button("StayButton", "Stay", Resolution.ScaledFont(80), Color.LightGreen, Stay);
 
             for (int i = 0; i < 2; i++)
             {
-                PokerCard.DrawTopCard(Shoe, PlayerHand);
-                PokerCard.DrawTopCard(Shoe, DealerHand);
+                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard(PlayerHand.GetCardResolutionOfHand(PlayerHand.Cards.Count), PlayerHand.Cards.Count.ToString() + "Player");
+                if(i != 2)
+                {
+                    PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard(DealerHand.GetCardResolutionOfHand(DealerHand.Cards.Count), DealerHand.Cards.Count.ToString() + "Dealer");
+                }
+                else
+                {
+                    new Sprite(DealerHand.GetCardResolutionOfHand(DealerHand.Cards.Count), "PokerCardBack");
+                }
             }
 
-            DealerHand[0].DrawCard("DealerFirstCard");
-            new Sprite(Resolution.GetResolution("DealerSecondCard"), "PokerCardBack");
-
-            PlayerHand[0].DrawCard("YourFirstCard");
-            PlayerHand[1].DrawCard("YourSecondCard");
-
-            if (CountHandValue(PlayerHand) == 21){
+            if (PlayerHand.CountHandValue() == 21)
+            {
                 Won("BlackJack!!!", (int)Math.Round(BetAmount * 1.5));
-            } 
+            }
+            else if (DealerHand.CountHandValue() == 21)
+            {
+                GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
+                DealerHand.Cards[1].DrawCard("DealerSecondCard");
+                Won("Dealer BlackJack", -BetAmount);
+            }
         }
 
         public static void Hit()
         {
-            if (PlayerHand.Count < 5)
+            if (PlayerHand.Cards.Count < 5)
             {
-                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Count] + "Card");
-                if(CountHandValue(PlayerHand) > 21)
+                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Cards.Count] + "Card");
+                if(PlayerHand.CountHandValue() > 21)
                 {
                     Won("Bust :(", -BetAmount);
                 }
             }
         }
-
-        public static int CountHandValue(List<PokerCard> hand)
-        {
-            int total = 0;
-            int numberOfAces = 0;
-
-            foreach (var card in hand)
-            {
-                // Count Ace first handle them later
-                if (card.IsAce)
-                {
-                    numberOfAces++;
-                }
-                total += card.CardValue;
-            }
-
-            while (numberOfAces > 0 && total > 21)
-            {
-                total -= 10;
-                numberOfAces--;
-            }
-            return total;
-        }
         public static void Stay()
         {
             GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
-            DealerHand[1].DrawCard("DealerSecondCard");
+            DealerHand.Cards[1].DrawCard("DealerSecondCard");
 
             // Dealer draw
-            while (CountHandValue(DealerHand) <= 16 && DealerHand.Count < 5)
+            while (DealerHand.CountHandValue() <= 16 && DealerHand.Cards.Count < 5)
             {
-                PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Count] + "Card");
+                PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Cards.Count] + "Card");
             }
 
-            if (CountHandValue(PlayerHand) > CountHandValue(DealerHand) && CountHandValue(PlayerHand) <= 21)
+            if (PlayerHand.CountHandValue() > DealerHand.CountHandValue() && PlayerHand.CountHandValue() <= 21)
             {
                 Won("You Won!!!!", BetAmount);
             }
-            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(DealerHand) > 21)
+            else if (PlayerHand.CountHandValue() <= 21 && DealerHand.CountHandValue() > 21)
             {
                 Won("You Won!!!!", BetAmount);
             }
-            else if (CountHandValue(PlayerHand) <= 21 && PlayerHand.Count == 5)
+            else if (PlayerHand.CountHandValue() <= 21 && PlayerHand.Cards.Count == 5)
             {
                 Won("5-card Charlie!!!!", BetAmount * 3);
             }
-            else if (CountHandValue(PlayerHand) <= 21 && CountHandValue(PlayerHand) == CountHandValue(DealerHand))
+            else if (PlayerHand.CountHandValue() <= 21 && PlayerHand.CountHandValue() == DealerHand.CountHandValue())
             {
                 Won("Tie", 0);
             }
@@ -154,14 +146,14 @@ namespace BlackJack2D
 
             WriteMoney();
 
-            // Put back the cards
-            foreach (var card in DealerHand)
+            // Discard the cards
+            foreach (var card in DealerHand.Cards)
             {
-                Shoe.Add(card);
+                DiscardPile.Cards.Add(card);
             }
-            foreach (var card in PlayerHand)
+            foreach (var card in PlayerHand.Cards)
             {
-                Shoe.Add(card);
+                DiscardPile.Cards.Add(card);
             }
         }
 

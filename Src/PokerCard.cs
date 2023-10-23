@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BlackJack2D
 {
@@ -98,29 +100,86 @@ namespace BlackJack2D
             }
             return shoe;
         }
-        public static void ShuffleShoe(List<PokerCard> shoe)
+        public static void ShuffleHand(PokerHand hand)
         {
             Random rng = new Random();
-            int cardNumber = shoe.Count;
+            int cardNumber = hand.Cards.Count;
 
             for (int i = 0; i < cardNumber; i++)
             {
                 int randomIndex = rng.Next(i, cardNumber);
-                PokerCard temp = shoe[i];
-                shoe[i] = shoe[randomIndex];
-                shoe[randomIndex] = temp;
+                PokerCard temp = hand.Cards[i];
+                hand.Cards[i] = hand.Cards[randomIndex];
+                hand.Cards[randomIndex] = temp;
             }
         }
-        public static PokerCard DrawTopCard(List<PokerCard> cards, List<PokerCard> hand)
+        public static PokerCard DrawTopCard(PokerHand from, PokerHand to)
         {
-            PokerCard card = cards[0];
-            cards.Remove(card);
-            hand.Add(card);
+            PokerCard card = from.Cards[0];
+            from.Cards.Remove(card);
+            to.Cards.Add(card);
             return card;
         }
         public static int CountNumberOfDeck(List<PokerCard> shoe)
         {
             return shoe.Count / 52;
+        }
+    }
+
+    public class PokerHand
+    {
+        public Resolution Resolution;
+        public List<PokerCard> Cards = new List<PokerCard>();
+        public static Dictionary<string, PokerHand> Hands = new Dictionary<string, PokerHand>();
+        public PokerHand(Resolution resolution, string id)
+        {
+            Resolution = resolution;
+            RegisterHand(id, this);
+        }
+        public static void RegisterHand(string id, PokerHand hand)
+        {
+            if (Hands.ContainsKey(id))
+            {
+                Log.Warning("Hand already exist: " + id);
+            }
+            Hands[id] = hand;
+        }
+
+        public int CountHandValue()
+        {
+            int total = 0;
+            int numberOfAces = 0;
+
+            foreach (var card in Cards)
+            {
+                // Count Ace first handle them later
+                if (card.IsAce)
+                {
+                    numberOfAces++;
+                }
+                total += card.CardValue;
+            }
+
+            while (numberOfAces > 0 && total > 21)
+            {
+                total -= 10;
+                numberOfAces--;
+            }
+            return total;
+        }
+        public Resolution GetCardResolutionOfHand(int index)
+        {
+            return new Resolution(
+                Resolution.Scale,
+                new Vector2(Resolution.Position.x + index * Resolution.Scaled(50),
+                Resolution.Position.y - index * Resolution.Scaled(20)));
+        }
+        public Resolution GetCardResolutionOfHand(int index, int x, int y)
+        {
+            return new Resolution(
+                Resolution.Scale,
+                new Vector2(Resolution.Position.x - index * Resolution.Scaled(x),
+                Resolution.Position.y - index * Resolution.Scaled(y)));
         }
     }
 }
