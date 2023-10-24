@@ -15,9 +15,8 @@ namespace BlackJack2D
         private static bool FirstTime = true;
         public static int BetAmount = 0;
         public static int Money = 0;
-        private static string[] Numbers = { "Zeroth", "First", "Second", "Third", "Fourth", "Fifth" };
-        private static PokerHand DealerHand = new PokerHand(Resolution.GetResolution("DealerSecondCard"), "DealerHand");
-        private static PokerHand PlayerHand = new PokerHand(Resolution.GetResolution("YourSecondCard"), "PlayerHand");
+        private static PokerHand DealerHand = new PokerHand(Resolution.GetResolution("DealerHand"), "DealerHand");
+        private static PokerHand PlayerHand = new PokerHand(Resolution.GetResolution("PlayerHand"), "PlayerHand");
         private static PokerHand DiscardPile = new PokerHand(Resolution.GetResolution("YourFirstCard"), "DiscardPile");
         private static PokerHand Shoe = new PokerHand(Resolution.GetResolution("YourFiftCard"), "Shoe");
         public static void Menu()
@@ -67,49 +66,48 @@ namespace BlackJack2D
 
             for (int i = 0; i < 2; i++)
             {
-                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard(PlayerHand.GetCardResolutionOfHand(PlayerHand.Cards.Count), PlayerHand.Cards.Count.ToString() + "Player");
-                if(i != 2)
+                PlayerHand.ReciveTopCard(Shoe, true);
+                if(i != 1)
                 {
-                    PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard(DealerHand.GetCardResolutionOfHand(DealerHand.Cards.Count), DealerHand.Cards.Count.ToString() + "Dealer");
+                    DealerHand.ReciveTopCard(Shoe, true);
                 }
                 else
                 {
-                    new Sprite(DealerHand.GetCardResolutionOfHand(DealerHand.Cards.Count), "PokerCardBack");
+                    DealerHand.ReciveTopCard(Shoe, true);
+                    DealerHand.FlipCard(1);
                 }
             }
 
             if (PlayerHand.CountHandValue() == 21)
             {
+                DealerHand.FlipCard(1);
                 Won("BlackJack!!!", (int)Math.Round(BetAmount * 1.5));
             }
             else if (DealerHand.CountHandValue() == 21)
             {
-                GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
-                DealerHand.Cards[1].DrawCard("DealerSecondCard");
+                DealerHand.FlipCard(1);
                 Won("Dealer BlackJack", -BetAmount);
             }
         }
 
         public static void Hit()
-        {
-            if (PlayerHand.Cards.Count < 5)
+        { 
+            PlayerHand.ReciveTopCard(Shoe, true);
+            if(PlayerHand.CountHandValue() > 21)
             {
-                PokerCard.DrawTopCard(Shoe, PlayerHand).DrawCard("Your" + Numbers[PlayerHand.Cards.Count] + "Card");
-                if(PlayerHand.CountHandValue() > 21)
-                {
-                    Won("Bust :(", -BetAmount);
-                }
+                DealerHand.FlipCard(1);
+                Won("Bust :(", -BetAmount);
             }
+            
         }
         public static void Stay()
         {
-            GameEngine.AllGraphicElements["PokerCardBack"].DestroySelf();
-            DealerHand.Cards[1].DrawCard("DealerSecondCard");
+            DealerHand.FlipCard(1);
 
             // Dealer draw
-            while (DealerHand.CountHandValue() <= 16 && DealerHand.Cards.Count < 5)
+            while (DealerHand.CountHandValue() <= 16)
             {
-                PokerCard.DrawTopCard(Shoe, DealerHand).DrawCard("Dealer" + Numbers[DealerHand.Cards.Count] + "Card");
+                DealerHand.ReciveTopCard(Shoe, true);
             }
 
             if (PlayerHand.CountHandValue() > DealerHand.CountHandValue() && PlayerHand.CountHandValue() <= 21)
@@ -147,13 +145,15 @@ namespace BlackJack2D
             WriteMoney();
 
             // Discard the cards
-            foreach (var card in DealerHand.Cards)
+            int numberOfCardOfDealerHand = DealerHand.Cards.Count;
+            int numberOfCardOfPlayerHand = PlayerHand.Cards.Count;
+            for (int i = 0; i < numberOfCardOfDealerHand; i++)
             {
-                DiscardPile.Cards.Add(card);
+                DiscardPile.ReciveTopCard(DealerHand);
             }
-            foreach (var card in PlayerHand.Cards)
+            for (int i = 0; i < numberOfCardOfPlayerHand; i++)
             {
-                DiscardPile.Cards.Add(card);
+                DiscardPile.ReciveTopCard(PlayerHand);
             }
         }
 

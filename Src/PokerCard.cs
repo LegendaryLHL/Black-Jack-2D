@@ -5,33 +5,39 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BlackJack2D
 {
     public class PokerCard
     {
-        public int CardId { get; set; }
+        // Fix naming
+        // make sure this is the api ignore logic first first make the base
+        // Dont cut CORNER!!!
+        // make as many function
         public string CardName { get; set; }
         public int CardValue { get; set; }
         public string CardColor { get; set; }
         public string CardSuit { get; set; }
         public bool IsAce { get; set; }
-        public string CardNameId { get; set; }
-        public PokerCard(int CardId, string CardSuit)
+        public bool FaceUp = true;
+        public string CardImageDirectory { get; set; }
+        public string Tag { get; set; }
+        public PokerCard(int generatorNum, string CardSuit, string addUniqueTag = "")
         {
             string[] nameForCards = { "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King" };
-            this.CardId = CardId;
-            this.CardName = nameForCards[CardId - 1];
-            if (CardId == 11 || CardId == 12 || CardId == 13)
+            CardName = nameForCards[generatorNum - 1];
+            if (generatorNum == 11 || generatorNum == 12 || generatorNum == 13)
             {
                 CardValue = 10;
             }
             else
             {
-                CardValue = CardId;
+                CardValue = generatorNum;
             }
 
-            if (CardId == 1)
+            if (generatorNum == 1)
             {
                 IsAce = true;
                 CardValue = 11;
@@ -62,26 +68,24 @@ namespace BlackJack2D
 
             }
 
-            CardNameId = CardName + "Of" + CardSuit;
+            CardImageDirectory = CardName + "Of" + CardSuit;
+            Tag = CardName + "Of" + CardSuit + addUniqueTag;
         }
 
-        public void DrawCard()
-        {
-            new Sprite(CardNameId);
-        }
         public void DrawCard(Resolution resolution)
         {
-            new Sprite(resolution, CardNameId, CardNameId);
+            if (FaceUp)
+            {
+                new Sprite(resolution, CardImageDirectory, Tag);
+            }
+            else
+            {
+                new Sprite(resolution, "PokerCardBack", Tag);
+            }
         }
-        public void DrawCard(Resolution resolution,string tag)
+        public void UnDrawCard()
         {
-            new Sprite(resolution, CardNameId, tag);
-        }
-
-        //bad
-        public void DrawCard(string resolutionName)
-        {
-            new Sprite(Resolution.GetResolution(resolutionName), CardNameId, CardNameId);
+            GameEngine.UnRegisterGraphicElement(GameEngine.AllGraphicElements[Tag]);
         }
 
         public static List<PokerCard> NewShoe(int numberOfDeck = 1)
@@ -94,7 +98,7 @@ namespace BlackJack2D
                 {
                     for (int value = 1; value <= 13; value++)
                     {
-                        shoe.Add(new PokerCard(value, suit));
+                        shoe.Add(new PokerCard(value, suit, i.ToString()));
                     }
                 }
             }
@@ -113,13 +117,6 @@ namespace BlackJack2D
                 hand.Cards[randomIndex] = temp;
             }
         }
-        public static PokerCard DrawTopCard(PokerHand from, PokerHand to)
-        {
-            PokerCard card = from.Cards[0];
-            from.Cards.Remove(card);
-            to.Cards.Add(card);
-            return card;
-        }
         public static int CountNumberOfDeck(List<PokerCard> shoe)
         {
             return shoe.Count / 52;
@@ -131,9 +128,11 @@ namespace BlackJack2D
         public Resolution Resolution;
         public List<PokerCard> Cards = new List<PokerCard>();
         public static Dictionary<string, PokerHand> Hands = new Dictionary<string, PokerHand>();
+        public string Id;
         public PokerHand(Resolution resolution, string id)
         {
             Resolution = resolution;
+            Id = id;
             RegisterHand(id, this);
         }
         public static void RegisterHand(string id, PokerHand hand)
@@ -167,19 +166,36 @@ namespace BlackJack2D
             }
             return total;
         }
+        public void FlipCard(int index = -1)
+        {
+            if(index == -1)
+            {
+                index = Cards.Count - 1;
+            }
+            PokerCard card = Cards[index];
+            card.FaceUp = !card.FaceUp;
+            if (GameEngine.AllGraphicElements.ContainsKey(card.Tag))
+            {
+                card.UnDrawCard();
+                card.DrawCard(GetCardResolutionOfHand(Cards.Count));
+            }
+        }
+        public void ReciveTopCard(PokerHand from, bool draw = false)
+        {
+            PokerCard card = from.Cards[0];
+            from.Cards.Remove(card);
+            Cards.Add(card);
+            if (draw)
+            {
+                card.DrawCard(GetCardResolutionOfHand(Cards.Count));
+            }
+        }
         public Resolution GetCardResolutionOfHand(int index)
         {
             return new Resolution(
-                Resolution.Scale,
+            Resolution.Scale,
                 new Vector2(Resolution.Position.x + index * Resolution.Scaled(50),
-                Resolution.Position.y - index * Resolution.Scaled(20)));
-        }
-        public Resolution GetCardResolutionOfHand(int index, int x, int y)
-        {
-            return new Resolution(
-                Resolution.Scale,
-                new Vector2(Resolution.Position.x - index * Resolution.Scaled(x),
-                Resolution.Position.y - index * Resolution.Scaled(y)));
+                Resolution.Position.y - index * Resolution.Scaled(50)));
         }
     }
 }
