@@ -17,8 +17,8 @@ namespace BlackJack2D
         public static int Money = 0;
         private static PokerHand DealerHand = new PokerHand(Resolution.GetResolution("DealerHand"), "DealerHand");
         private static PokerHand PlayerHand = new PokerHand(Resolution.GetResolution("PlayerHand"), "PlayerHand");
-        private static PokerHand DiscardPile = new PokerHand(Resolution.GetResolution("YourFirstCard"), "DiscardPile");
-        private static PokerHand Shoe = new PokerHand(Resolution.GetResolution("YourFiftCard"), "Shoe");
+        private static PokerHand DiscardPile = new PokerHand(Resolution.GetResolution("DiscardPile"), "DiscardPile");
+        private static PokerHand Shoe = new PokerHand(Resolution.GetResolution("Shoe"), "Shoe");
         public static void Menu()
         {
             GameEngine.AllGraphicElements.Clear();

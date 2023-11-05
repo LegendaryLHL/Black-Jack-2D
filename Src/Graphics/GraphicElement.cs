@@ -42,7 +42,7 @@ namespace BlackJack2D
         // tag is other element
         public bool IsColiding(string tag)
         {
-            foreach (Sprite b in GameEngine.AllGraphicElements.Values)
+            foreach (GraphicElement b in GameEngine.AllGraphicElements.Values)
             {
                 if (b.Tag == tag)
                 {

@@ -45,6 +45,7 @@ namespace BlackJack2D
             new Resolution(new Vector2(176, 248), new Vector2(750, 300), "DealerHand");
             new Resolution(new Vector2(176, 248), new Vector2(750, 700), "PlayerHand");
             new Resolution(new Vector2(176, 248), new Vector2(200, 900), "DiscardPile");
+            new Resolution(new Vector2(176, 248), new Vector2(1300, 900), "Shoe");
             new Resolution(new Vector2(200, 100), new Vector2(350, 900), "HitButton");
             new Resolution(new Vector2(200, 100), new Vector2(1250, 900), "StayButton");
             new Resolution(new Vector2(0,0), new Vector2(100, 100), "PlaceBet");
