@@ -15,27 +15,29 @@ namespace BlackJack2D
     }
     public abstract class GameEngine
     {
-        private Vector2 ScreenSize = new Vector2(512, 512);
-        private string Title = "*insert title*";
-        private Canvas Window = null;
-        private Thread GameLoopThread = null;
+        private static Vector2 ScreenSize = new Vector2(512, 512);
+        private static string Title = "*insert title*";
+        private static Canvas Window = null;
+        private static Thread GameLoopThread = null;
 
         public static Dictionary<string, GraphicElement> AllGraphicElements = new Dictionary<string, GraphicElement>();
 
-        public Color BackgroundColour = Color.White;
-        public Vector2 CameraPositon = new Vector2(0,0);
-        public float CameraAngle = 0f;
-        public Vector2 CameraZoom = new Vector2(1, 1);
-        public FormWindowState WindowStateSize = FormWindowState.Normal;
 
-        public GameEngine(Vector2 ScreenSize, string Title)
+        public static Vector2 CursorPosition;
+        public static Color BackgroundColour = Color.White;
+        public static Vector2 CameraPositon = new Vector2(0,0);
+        public static float CameraAngle = 0f;
+        public static Vector2 CameraZoom = new Vector2(1, 1);
+        public static FormWindowState WindowStateSize = FormWindowState.Normal;
+
+        public GameEngine(Vector2 screenSize, string title)
         {
             OnInitialise();
-            this.ScreenSize = ScreenSize;
-            this.Title = Title;
+            ScreenSize = screenSize;
+            Title = title;
             Window = new Canvas();
             Window.Size = new Size((int)ScreenSize.x, (int)ScreenSize.y);
-            Window.Text = this.Title;
+            Window.Text = Title;
             Window.Paint += Renderer;
             Window.KeyDown += Window_KeyDown;
             Window.KeyUp += Window_KeyUP;
@@ -54,6 +56,8 @@ namespace BlackJack2D
 
         private void Window_MouseMove(object sender, MouseEventArgs e)
         {
+            // Offset if needed
+            CursorPosition = new Vector2(Window.PointToClient(Cursor.Position).X - CameraPositon.x, Window.PointToClient(Cursor.Position).Y - CameraPositon.y);
             GetMouseMove(e);
         }
 
