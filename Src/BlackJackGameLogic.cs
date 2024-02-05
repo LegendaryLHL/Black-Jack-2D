@@ -157,23 +157,23 @@ namespace BlackJack2D
             }
         }
 
-        //writer
+        // Serialize data to a binary file
         public static void WriteMoney()
         {
-            using (StreamWriter sw = new StreamWriter("Cache.txt"))
+            using (BinaryWriter writer = new BinaryWriter(File.Open("Cache.dat", FileMode.Create)))
             {
-                sw.WriteLine(Money);
+                writer.Write(Money);
             }
         }
 
-        //read
+        // Deserialize data from a binary file
         public static void ReadMoney()
         {
-            if (File.Exists("Cache.txt"))
+            if (File.Exists("Cache.dat"))
             {
-                using (StreamReader SW = new StreamReader("Cache.txt"))
+                using (BinaryReader reader = new BinaryReader(File.Open("Cache.dat", FileMode.Open)))
                 {
-                    Money = Int32.Parse(SW.ReadLine());
+                    Money = reader.ReadInt32();
                 }
             }
         }

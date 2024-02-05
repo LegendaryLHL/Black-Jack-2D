@@ -12,10 +12,6 @@ namespace BlackJack2D
 {
     public class PokerCard
     {
-        // Fix naming
-        // make sure this is the api ignore logic first first make the base
-        // Dont cut CORNER!!!
-        // make as many function
         public string CardName { get; set; }
         public int CardValue { get; set; }
         public string CardColor { get; set; }
