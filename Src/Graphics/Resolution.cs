@@ -11,26 +11,26 @@ namespace BlackJack2D
 {
     public class Resolution
     {
-        public string Id { get; set; } //same as tag in sprite
+        public string Id { get; set; }
         public static Dictionary<string, Resolution> Resolutions = new Dictionary<string, Resolution>();
         public Vector2 Position { get; set; }
         public Vector2 Scale { get; set; }
 
         public static Vector2 ScreenResolution = new Vector2(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-        private static Vector2 OriginalResolution = new Vector2(2048,1152);
+        public static Vector2 OriginalResolution = new Vector2(2048,1152);
 
         public Resolution(Vector2 scale, Vector2 position, string id)
         {
             Scale = scale;
             Position = position;
             Id = id;
-            Resolutions[id] = ScaleResolution(this);
+            Resolutions[id] = this;
         }
         public Resolution(Vector2 scale, Vector2 position)
         {
             Scale = scale;
             Position = position;
-            Resolutions["Tag not set"] = ScaleResolution(this);
+            Resolutions["Tag not set"] = this;
         }
         public static void MakeResolution()
         {
@@ -39,7 +39,6 @@ namespace BlackJack2D
             new Resolution(new Vector2(200, 100), new Vector2(350, 900), "ShuffleDeckButton");
             new Resolution( new Vector2(200, 100), new Vector2(1300, 900), "BackButton");
             new Resolution(new Vector2(200, 100), new Vector2(845, 900), "RearrangeButton");
-            new Resolution(new Vector2(88, 124), new Vector2(140, 200), "DrawAllCards");
             new Resolution(new Vector2(200, 100), new Vector2(400, 450), "PlayButton");
             new Resolution(new Vector2(200, 100), new Vector2(1300, 450), "QuitButton");
             new Resolution(new Vector2(176, 248), new Vector2(750, 300), "DealerHand");
@@ -64,16 +63,21 @@ namespace BlackJack2D
             new Resolution(new Vector2(200, 100), new Vector2(400, 450), "UpgradeButton");
         }
 
-        private static Resolution ScaleResolution(Resolution resolution)
+        public static Resolution ScaleResolution(Resolution resolution)
         {
-            resolution.Scale = new Vector2(resolution.Scale.x * ScreenResolution.x / OriginalResolution.x, resolution.Scale.y * ScreenResolution.y / OriginalResolution.y);
-            resolution.Position = new Vector2(resolution.Position.x * ScreenResolution.x / OriginalResolution.x, resolution.Position.y * ScreenResolution.y / OriginalResolution.y);
-            return resolution;
+            Resolution scaledResolution = new Resolution(resolution.Scale, resolution.Position);
+            float scaleX = ScreenResolution.x / OriginalResolution.x;
+            float scaleY = ScreenResolution.y / OriginalResolution.y;
+
+            scaledResolution.Position = new Vector2(resolution.Position.x * scaleX, resolution.Position.y * scaleY);
+            scaledResolution.Scale = new Vector2(resolution.Scale.x * scaleX, resolution.Scale.y * scaleY);
+            return scaledResolution;
         }
+
         public static Font ScaledFont(int fontSize)
         {
-            float scaleX = (float)ScreenResolution.x / OriginalResolution.x;
-            float scaleY = (float)ScreenResolution.y / OriginalResolution.y;
+            float scaleX = ScreenResolution.x / OriginalResolution.x;
+            float scaleY = ScreenResolution.y / OriginalResolution.y;
 
             int scaledFontSize = (int)(fontSize * Math.Min(scaleX, scaleY));
 
@@ -84,41 +88,11 @@ namespace BlackJack2D
 
             return new Font("Arial", scaledFontSize, FontStyle.Regular, GraphicsUnit.Pixel);
         }
-        public static Resolution GetResolution(string id)
-        {
-            foreach (Resolution resolution in Resolutions.Values)
-            {
-                if (resolution.Id == id)
-                {
-                    return resolution;
-                }
-            }
-
-            //hover temp fix later
-            foreach (Resolution resolution in Resolutions.Values)
-            {
-                if (resolution.Id == id.Replace("Hover", ""))
-                {
-                    return resolution;
-                }
-            }
-
-            //how to fix this
-            foreach (Resolution resolution in Resolutions.Values)
-            {
-                if (resolution.Id == "DrawAllCards")
-                {
-                    return resolution;
-                }
-            }
-
-            return null;
-        }
 
         public static int Scaled(int number)
         {
-            float scaleX = (float)ScreenResolution.x / OriginalResolution.x;
-            float scaleY = (float)ScreenResolution.y / OriginalResolution.y;
+            float scaleX = ScreenResolution.x / OriginalResolution.x;
+            float scaleY = ScreenResolution.y / OriginalResolution.y;
 
             int scaledNumber = (int)(number * Math.Min(scaleX, scaleY));
 

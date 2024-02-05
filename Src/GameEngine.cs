@@ -94,6 +94,11 @@ namespace BlackJack2D
             WindowResize(e);
         }
 
+        public Vector2 getWindowWidth()
+        {
+            return new Vector2(Window.ClientSize.Width, Window.Height);
+        }
+
         public static void RegisterGraphicElement(GraphicElement graphicElements)
         {
             if (AllGraphicElements.ContainsKey(graphicElements.Tag)){

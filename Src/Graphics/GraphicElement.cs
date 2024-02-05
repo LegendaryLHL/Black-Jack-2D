@@ -5,8 +5,7 @@ namespace BlackJack2D
 {
     public abstract class GraphicElement
     {
-        public Vector2 Position { get; set; }
-        public Vector2 Scale { get; set; }
+        public Resolution Resolution { get; set; }
         public string Tag = "";
 
         public void DestroySelf()
@@ -20,10 +19,11 @@ namespace BlackJack2D
             {
                 if (e.Tag == tag)
                 {
-                    if (GameEngine.CursorPosition.x < e.Position.x + e.Scale.x &&
-                        GameEngine.CursorPosition.y < e.Position.y + e.Scale.y &&
-                        GameEngine.CursorPosition.x > e.Position.x &&
-                        GameEngine.CursorPosition.y > e.Position.y)
+                    Resolution scaledResolution = Resolution.ScaleResolution(e.Resolution);
+                    if (GameEngine.CursorPosition.x < scaledResolution.Position.x + scaledResolution.Scale.x &&
+                        GameEngine.CursorPosition.y < scaledResolution.Position.y + scaledResolution.Scale.y &&
+                        GameEngine.CursorPosition.x > scaledResolution.Position.x &&
+                        GameEngine.CursorPosition.y > scaledResolution.Position.y)
                     {
                         return true;
                     }
@@ -33,10 +33,11 @@ namespace BlackJack2D
         }
         public bool IsCursorOnGraphicElement()
         {
-            return      GameEngine.CursorPosition.x < Position.x + Scale.x &&
-                        GameEngine.CursorPosition.y < Position.y + Scale.y &&
-                        GameEngine.CursorPosition.x > Position.x &&
-                        GameEngine.CursorPosition.y > Position.y;
+            Resolution scaledResolution = Resolution.ScaleResolution(Resolution);
+            return      GameEngine.CursorPosition.x < scaledResolution.Position.x + scaledResolution.Scale.x &&
+                        GameEngine.CursorPosition.y < scaledResolution.Position.y + scaledResolution.Scale.y &&
+                        GameEngine.CursorPosition.x > scaledResolution.Position.x &&
+                        GameEngine.CursorPosition.y > scaledResolution.Position.y;
         }
 
         // tag is other element
@@ -46,10 +47,10 @@ namespace BlackJack2D
             {
                 if (b.Tag == tag)
                 {
-                    if (Position.x < b.Position.x + b.Scale.x &&
-                        Position.x + Scale.x > b.Position.x &&
-                        Position.y < b.Position.y + b.Scale.y &&
-                        Position.y + Scale.y > b.Position.y)
+                    if (Resolution.Position.x < b.Resolution.Position.x + b.Resolution.Scale.x &&
+                        Resolution.Position.x + Resolution.Scale.x > b.Resolution.Position.x &&
+                        Resolution.Position.y < b.Resolution.Position.y + b.Resolution.Scale.y &&
+                        Resolution.Position.y + Resolution.Scale.y > b.Resolution.Position.y)
                     {
                         return true;
                     }

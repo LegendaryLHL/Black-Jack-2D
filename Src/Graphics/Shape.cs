@@ -11,10 +11,9 @@ namespace BlackJack2D
     public class Shape : GraphicElement
     {
         public Color Color;
-        public Shape(Vector2 Position, Vector2 Scale, Color color, string Tag)
+        public Shape(Color color, string Tag = "not set shape tag")
         {
-            this.Position = Position;
-            this.Scale = Scale;
+            Resolution = Resolution.Resolutions[Tag];
             this.Tag = Tag;
 
             GameEngine.RegisterGraphicElement(this);
@@ -23,7 +22,8 @@ namespace BlackJack2D
 
         public override void Draw(Graphics g)
         {
-            g.FillRectangle(new SolidBrush(Color), Position.x, Position.y, Scale.x, Scale.y);
+            Resolution scaledResolution = Resolution.ScaleResolution(Resolution);
+            g.FillRectangle(new SolidBrush(Color), scaledResolution.Position.x, scaledResolution.Position.y, scaledResolution.Scale.x, scaledResolution.Scale.y);
         }
     }
 }

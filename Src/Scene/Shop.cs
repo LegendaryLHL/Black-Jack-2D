@@ -12,8 +12,8 @@ namespace BlackJack2D
         public static void ShopFunction()
         {
             GameEngine.AllGraphicElements.Clear();
-            new Button("UpgradeButton", "Upgrade", Resolution.ScaledFont(50), Color.LightGreen, () => { });
-            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, BlackJackGameLogic.Menu);
+            new Button("Upgrade", 50, Color.LightGreen, () => { }, "UpgradeButton");
+            new Button("Back", 80, Color.LightGreen, GameLogic.Menu, "BackButton");
         }
     }
 }

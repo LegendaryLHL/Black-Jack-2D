@@ -16,7 +16,8 @@ namespace BlackJack2D
         {
             Resolution.MakeResolution();
             BackgroundColour = Color.Green;
-            BlackJackGameLogic.Menu();
+            GameLogic.Menu();
+            Resolution.ScreenResolution = getWindowWidth();
         }
         public override void OnDraw()
         {
@@ -89,21 +90,7 @@ namespace BlackJack2D
 
         public override void WindowResize(EventArgs e)
         {
-            //Resolution.ScreenResolution = new Vector2(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-            // New Instance of all resolutions
-            //Resolution.Resolutions = new Dictionary<string, Resolution>();
-            //Resolution.MakeResolution();
-
-            // Reinitalise resolution of all sprite
-            /*foreach (Sprite2D sprite in AllSprites.Values)
-            {
-                if (sprite.Tag != null)
-                {
-                    Console.Write(sprite.Tag);
-                    sprite.Scale = Resolution.Resolutions[sprite.Tag].Scale;
-                    sprite.Position = Resolution.Resolutions[sprite.Tag].Position;
-                }
-            }*/
+            Resolution.ScreenResolution = getWindowWidth();
         }
     }
 }

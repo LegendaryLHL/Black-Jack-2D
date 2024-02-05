@@ -10,13 +10,13 @@ namespace BlackJack2D
     public class Text : GraphicElement
     {
         public string TextString;
-        public Font Font;
+        public int FontSize;
 
-        public Text(string textString, Font font, Vector2 position, string tag = "not set")
+        public Text(string textString, int fontSize, string tag = "not set text tag")
         {
             TextString = textString;
-            Font = font;
-            Position = position;
+            FontSize = fontSize;
+            Resolution = Resolution.Resolutions[tag];
             Tag = tag;
 
             GameEngine.RegisterGraphicElement(this);
@@ -24,7 +24,8 @@ namespace BlackJack2D
 
         public override void Draw(Graphics g)
         {
-            g.DrawString(TextString, Font, new SolidBrush(Color.Black), Position.x, Position.y);
+            Resolution scaledResolution = Resolution.ScaleResolution(Resolution);
+            g.DrawString(TextString, Resolution.ScaledFont(FontSize), new SolidBrush(Color.Black), scaledResolution.Position.x, scaledResolution.Position.y);
         }
     }
 }

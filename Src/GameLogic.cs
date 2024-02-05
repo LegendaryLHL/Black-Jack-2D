@@ -10,21 +10,21 @@ using System.Media;
 
 namespace BlackJack2D
 {
-    class BlackJackGameLogic
+    class GameLogic
     {
         private static bool FirstTime = true;
         public static int BetAmount = 0;
         public static int Money = 0;
-        private static PokerHand DealerHand = new PokerHand(Resolution.GetResolution("DealerHand"), "DealerHand");
-        private static PokerHand PlayerHand = new PokerHand(Resolution.GetResolution("PlayerHand"), "PlayerHand");
-        private static PokerHand DiscardPile = new PokerHand(Resolution.GetResolution("DiscardPile"), "DiscardPile");
-        private static PokerHand Shoe = new PokerHand(Resolution.GetResolution("Shoe"), "Shoe");
+        private static PokerHand DealerHand = new PokerHand(Resolution.Resolutions["DealerHand"], "DealerHand");
+        private static PokerHand PlayerHand = new PokerHand(Resolution.Resolutions["PlayerHand"], "PlayerHand");
+        private static PokerHand DiscardPile = new PokerHand(Resolution.Resolutions["DiscardPile"], "DiscardPile");
+        private static PokerHand Shoe = new PokerHand(Resolution.Resolutions["Shoe"], "Shoe");
         public static void Menu()
         {
             GameEngine.AllGraphicElements.Clear();
-            new Button("PlayButton", "Play", Resolution.ScaledFont(80), Color.LightGreen, Play);
-            new Button("QuitButton", "Quit", Resolution.ScaledFont(80), Color.LightGreen, Application.Exit);
-            new Button("ShopButton", "Shop", Resolution.ScaledFont(80), Color.LightGreen, Shop.ShopFunction);
+            new Button("Play", 80, Color.LightGreen, Play, "PlayButton");
+            new Button("Quit", 80, Color.LightGreen, Application.Exit, "QuitButton");
+            new Button("Shop", 80, Color.LightGreen, Shop.ShopFunction, "ShopButton");
         }
         public static void Play()
         {
@@ -35,21 +35,21 @@ namespace BlackJack2D
             }
             //put bet
             GameEngine.AllGraphicElements.Clear();
-            new Text("Place your bet:", Resolution.ScaledFont(100), Resolution.GetResolution("PlaceBet").Position, "placeBet");
-            new Text($"Your Money: {Money}$", Resolution.ScaledFont(100), Resolution.GetResolution("YourMoney").Position, "yourMoney");
+            new Text("Place your bet:", 100, "PlaceBet");
+            new Text($"Your Money: {Money}$", 100, "YourMoney");
             int[] values = {0, 50, 100, 200, 500, 1000, 5000, 10000, 100000, 1000000};
             foreach (var value in values)
             {
-                new Button(value.ToString(), value.ToString(), Resolution.ScaledFont(50), Color.LightGreen, () =>
+                new Button(value.ToString(), 50, Color.LightGreen, () =>
                 {
                     if (Money >= value)
                     {
                         BetAmount = value;
                         BlackJack();
                     }
-                });
+                }, value.ToString());
             }
-            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
+            new Button("Back", 80, Color.LightGreen, Menu, "BackButton");
         }
         public static void BlackJack()
         {
@@ -61,8 +61,8 @@ namespace BlackJack2D
                 FirstTime = false;
             }
 
-            new Button("HitButton", "Hit", Resolution.ScaledFont(80), Color.LightGreen, Hit);
-            new Button("StayButton", "Stay", Resolution.ScaledFont(80), Color.LightGreen, Stay);
+            new Button("Hit", 80, Color.LightGreen, Hit, "HitButton");
+            new Button("Stay", 80, Color.LightGreen, Stay, "StayButton");
 
             for (int i = 0; i < 2; i++)
             {
@@ -137,9 +137,9 @@ namespace BlackJack2D
             GameEngine.AllGraphicElements["HitButton"].DestroySelf();
             GameEngine.AllGraphicElements["StayButton"].DestroySelf();
 
-            new Button("BackButton", "Back", Resolution.ScaledFont(80), Color.LightGreen, Menu);
+            new Button("Back", 80, Color.LightGreen, Menu, "BackButton");
 
-            new Text(msg, Resolution.ScaledFont(100), Resolution.GetResolution("HitButton").Position);
+            new Text(msg, 100, "HitButton");
             Money += winAmount;
 
             WriteMoney();

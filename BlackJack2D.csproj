@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Src\BlackJackGameLogic.cs" />
+    <Compile Include="Src\GameLogic.cs" />
     <Compile Include="Src\BlackJackEngine.cs" />
     <Compile Include="Src\Graphics\Button.cs" />
     <Compile Include="Src\Graphics\GraphicElement.cs" />

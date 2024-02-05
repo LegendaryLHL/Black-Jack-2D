@@ -11,32 +11,18 @@ namespace BlackJack2D
     public class Button : GraphicElement
     {
         public string Text;
-        public Font Font;
+        public int FontSize;
         public Action RunAction;
         public bool IsHover = false;
         public bool IsHeld = false;
         public Color Color;
 
-        public Button(Resolution resolution, string text, Font font, Color color, Action runAction, string tag = "not set")
+        public Button(string text, int fontSize, Color color, Action runAction, string tag = "not set button tag")
         {
-            Position = resolution.Position;
-            Scale = resolution.Scale;
+            Resolution = Resolution.Resolutions[tag];
             Text = text;
             Tag = tag;
-            Font = font;
-            Color = color;
-            RunAction = runAction;
-
-            GameEngine.RegisterGraphicElement(this);
-        }
-        public Button(string tag, string text, Font font, Color color, Action runAction)
-        {
-            Resolution resolution = Resolution.GetResolution(tag);
-            Position = resolution.Position;
-            Scale = resolution.Scale;
-            Text = text;
-            Tag = tag;
-            Font = font;
+            FontSize = fontSize;
             Color = color;
             RunAction = runAction;
 
@@ -44,20 +30,21 @@ namespace BlackJack2D
         }
         public override void Draw(Graphics g)
         {
+            Resolution scaledResolution = Resolution.ScaleResolution(Resolution);
             // Rectangle
-            g.FillRectangle(new SolidBrush(Color), Position.x, Position.y, Scale.x, Scale.y);
+            g.FillRectangle(new SolidBrush(Color), scaledResolution.Position.x, scaledResolution.Position.y, scaledResolution.Scale.x, scaledResolution.Scale.y);
 
             // Text
-            SizeF textSize = g.MeasureString(Text, Font);
-            float textX = Position.x + (Scale.x - textSize.Width) / 2;
-            float textY = Position.y + (Scale.y - textSize.Height) / 2;
-            g.DrawString(Text, Font, new SolidBrush(Color.Black), textX, textY);
+            SizeF textSize = g.MeasureString(Text, Resolution.ScaledFont(FontSize));
+            float textX = scaledResolution.Position.x + (scaledResolution.Scale.x - textSize.Width) / 2;
+            float textY = scaledResolution.Position.y + (scaledResolution.Scale.y - textSize.Height) / 2;
+            g.DrawString(Text, Resolution.ScaledFont(FontSize), new SolidBrush(Color.Black), textX, textY);
 
             // Hover Border
             if (IsHover)
             {
                 Pen borderPen = new Pen(Color.Black, 4);
-                g.DrawRectangle(borderPen, Position.x, Position.y, Scale.x, Scale.y);
+                g.DrawRectangle(borderPen, scaledResolution.Position.x, scaledResolution.Position.y, scaledResolution.Scale.x, scaledResolution.Scale.y);
             }
         }
     }

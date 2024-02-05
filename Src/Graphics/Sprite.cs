@@ -15,28 +15,38 @@ namespace BlackJack2D
         public Bitmap SpriteImg = null;
         public bool IsRefrence = false;
 
-        public Sprite(Resolution resolution, string Directory, string Tag)
+        public Sprite(string Directory, string Tag = "not set sprite tag")
         {
-            Position = resolution.Position;
-            Scale = resolution.Scale;
+            Resolution = Resolution.Resolutions[Tag];
             this.Directory = Directory;
             this.Tag = Tag;
 
             Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
-            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+            Bitmap sprite = new Bitmap(temp, (int)Resolution.Scale.x, (int)Resolution.Scale.y);
             SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite(Resolution resolution, string Tag)
+        public Sprite(Resolution resolution, string Directory, string Tag = "not set sprite tag")
         {
-            Position = resolution.Position;
-            Scale = resolution.Scale;
+            Resolution = resolution;
+            this.Directory = Directory;
+            this.Tag = Tag;
+
+            Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
+            Bitmap sprite = new Bitmap(temp, (int)Resolution.Scale.x, (int)Resolution.Scale.y);
+            SpriteImg = sprite;
+
+            GameEngine.RegisterGraphicElement(this);
+        }
+        public Sprite(string Tag = "not set sprite tag")
+        {
+            Resolution = Resolution.Resolutions[Tag];
             Directory = Tag;
             this.Tag = Tag;
 
             Image temp = Image.FromFile($"../../Assets/Images/{Directory}.png");
-            Bitmap sprite = new Bitmap(temp, (int)this.Scale.x, (int)this.Scale.y);
+            Bitmap sprite = new Bitmap(temp, (int)Resolution.Scale.x, (int)Resolution.Scale.y);
             SpriteImg = sprite;
 
             GameEngine.RegisterGraphicElement(this);
@@ -52,36 +62,22 @@ namespace BlackJack2D
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite(Resolution resolution, Bitmap Refrence, string Tag)
+        public Sprite(Bitmap Refrence, string Tag = "not set sprite tag")
         {
-            Position = resolution.Position;
-            Scale = resolution.Scale;
+            Resolution = Resolution.Resolutions[Tag];
             this.Tag = Tag;
 
             SpriteImg = Refrence;
 
             GameEngine.RegisterGraphicElement(this);
         }
-        public Sprite(string Tag)
-        {
-            Resolution resolution = Resolution.GetResolution(Tag);
-            Position = resolution.Position;
-            Scale = resolution.Scale;
-            Directory = Tag;
-            this.Tag = Tag;
-
-            Image img = Image.FromFile($"../../Assets/Images/{Directory}.png");
-            Bitmap sprite = new Bitmap(img, (int)Scale.x, (int)Scale.y);
-            SpriteImg = sprite;
-
-            GameEngine.RegisterGraphicElement(this);
-        }
 
         public override void Draw(Graphics g)
         {
+            Resolution scaledResolution = Resolution.ScaleResolution(Resolution);
             if (!IsRefrence)
             {
-                g.DrawImage(SpriteImg, Position.x, Position.y, Scale.x, Scale.y);
+                g.DrawImage(SpriteImg, scaledResolution.Position.x, scaledResolution.Position.y, scaledResolution.Scale.x, scaledResolution.Scale.y);
             }
         }
     }
